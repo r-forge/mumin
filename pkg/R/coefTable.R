@@ -38,8 +38,9 @@ function(model, ...) {
 }
 
 `coefTable.lm` <-
+`coefTable.betareg` <- 
 function(model, ...)
-	.makeCoefTable(coef(model), sqrt(diag(vcov(model, ...))), model$df.residual)
+	.makeCoefTable(coef(model), sqrt(diag(vcov(model, ...))), df.residual(model))
 
 
 `coefTable.survreg` <- 
@@ -119,7 +120,6 @@ function(model, ...) {
 }
 
 `coefTable.aodql` <-
-`coefTable.betareg` <- 
 `coefTable.glimML` <-
 `coefTable.unmarkedFit` <- 
 function(model, ...)

@@ -1,3 +1,16 @@
+
+
+`formula.averaging` <-
+function (x, ...) {
+    if (!is.null(x$formula)) {
+        x$formula
+    } else if (!is.null(modelList <- attr(x, "modelList"))) {
+        update(formula(modelList[[1L]]), reformulate(unique(unlist(lapply(modelList, 
+            function(x) attr(terms(formula(x)), "term.labels"))))))
+    } else NULL
+}
+
+
 `coef.averaging` <-
 function(object, full = FALSE, ...) {
 	## XXX: backward compatibility:

@@ -87,7 +87,7 @@ function(object, subset, fit = FALSE, ..., revised.var = TRUE) {
 	.Debug(.Generic <- "model.avg")
 
 	ret <- list(
-		msTable = structure(as.data.frame(mstab),
+		msTable = structure(as.data.frame(mstab, stringsAsFactors = TRUE),
 			term.codes = attr(allmodelnames, "variables")),
 		coefficients = coefMat,
 		coefArray = cfarr,
@@ -205,10 +205,14 @@ function(object, ..., beta = c("none", "sd", "partial.sd"),
 
 	if (betaMode == 1L) {
 		response.sd <- sd(model.response(model.frame(object)))
-		for(i in seq_along(coefTables))
+		for(i in seq_along(coefTables)) {
+			X <- model.matrix(models[[i]])
 			coefTables[[i]][, 1L:2L] <-
 				coefTables[[i]][, 1L:2L] *
-				apply(model.matrix(models[[i]]), 2L, sd) / response.sd
+				#apply(model.matrix(models[[i]]), 2L, sd) / response.sd
+				apply(X[, match(rownames(coefTables[[i]]), colnames(X)),
+					drop = FALSE], 2L, sd) / response.sd
+		}
 	}
 
 	cfarr <- coefArray(coefTables)
@@ -280,7 +284,7 @@ function(object, ..., beta = c("none", "sd", "partial.sd"),
 	.Debug(.Generic <- "model.avg")
 	
 	ret <- list(
-		msTable = structure(as.data.frame(mstab),
+		msTable = structure(as.data.frame(mstab, stringsAsFactors = TRUE),
 			term.codes = attr(allmodelnames, "variables")),
 		coefficients = coefMat,
 		coefArray = cfarr,

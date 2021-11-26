@@ -1,5 +1,18 @@
 MuMIn package news:
 
+Version: 1.44.7 (2021-11-25)
+coefTable/coeffs.glmmTMB: now include "trivial" dispersion parameter
+
+Version: 1.44.6 (2021-05-19)
+added stringsAsFactors=TRUE to most 'as.data.frame' occurences to bring back 
+    the desired behaviour (which changed in R 4.0.0).
+
+Version: 1.44.5 (2021-05-11)
+std.coef: now matches coefficient names with model matrix column names.
+
+Version: 1.44.4 (2021-04-20)
+coefTable.betareg - now includes residual df.
+
 Version: 1.44.3 (2021-03-05)
 (fixed) getAllTerms.zeroinfl: error when the function was called from non-global
     environment (spotted by Richard Shefferson)

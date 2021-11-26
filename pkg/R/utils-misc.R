@@ -14,7 +14,8 @@ function(...) {
 	res
 }
 
-warnonce <- function(id, ...) {
+warnonce <- 
+function(id, ...) {
 	if(!isTRUE(get0(flag <- paste0("warned.", as.character(id)[1L]), .MuMInEnv,
 					ifnotfound = FALSE))) {
 		assign(flag, TRUE, envir = .MuMInEnv)

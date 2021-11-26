@@ -77,7 +77,8 @@ function(object, newdata = NULL, se.fit = FALSE, interval = NULL,
 				))
 		}
 
-        .untransform <- function(fit, se.fit = NULL, models) {
+        .untransform <- 
+        function(fit, se.fit = NULL, models) {
 			links <- tryCatch(vapply(models, function(m) family(m)[["link"]], ""),
 							error = function(e) NULL)
 			if (!is.null(links)) {

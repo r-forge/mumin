@@ -27,10 +27,13 @@ function(rank = NULL, rank.args = NULL, object = NULL, ...) {
 		return(IC)
 	} else if(inherits(rank, "rankFunction") && length(rank.args) == 0L) {
 		return(rank)
-	}
-
-	srank <- substitute(rank, parent.frame())
-	if(srank == "rank") srank <- substitute(rank)
+	} else if(is.list(rank) && length(rank) == 1L && is.function(rank[[1L]])) {
+        srank <- names(rank)[1L]
+        rank <- rank[[1L]]
+    } else {
+        srank <- substitute(rank, parent.frame())
+        if(srank == "rank") srank <- substitute(rank)
+    }
 
 	rank <- match.fun(rank)
 	ICName <- switch(mode(srank), call = as.name("IC"), character = as.name(srank), name=, srank)
@@ -293,7 +296,7 @@ function(x, minlength = 4, minwordlen = 1,
 	av <- v
 	if(length(i)) {
 		tb <- rbindDataFrameList(lapply(s, function(x)
-			as.data.frame(rbind(c(table(x))))))
+			as.data.frame(rbind(c(table(x))), stringsAsFactors = TRUE)))
 		tb[is.na(tb)] <- 0L
 
 		if(length(v) > length(i)) minlength <-
@@ -392,18 +395,36 @@ function(models, withModel = FALSE, withFamily = TRUE,
 		if(ncol(arg)) arg <- gsub("([\"'\\s]+|\\w+ *=)","", arg, perl = TRUE)
 	}
 	ret <- as.data.frame(cbind(model = abvtt, family = if(withFamily) fam else NULL,
-		arg, deparse.level = 0L))
+		arg, deparse.level = 0L), stringsAsFactors = TRUE)
 	attr(ret, "variables") <- variables
 	ret
 }
 
 
+# TODO: add theta
+# TODO: glmmTMB family
+# FIXME: family.betareg is not binomial
+#negbin(theta = .1, link = "log")$getTheta()
+#ocat(theta=1,link="identity",R=NULL)$getTheta(1)
+#ziP(theta = 1, link = "identity",b=0)
+
 family2char <-
 function(x, fam = x$family, link = x$link) {
-	if(nchar(fam) > 17L && (substr(fam, 1L, 17) == "Negative Binomial")) {
+	if(startsWith(fam, "Negative Binomial")) {
 		theta <- as.numeric(strsplit(fam, "[\\(\\)]")[[1L]][2L])
 		paste0("negative.binomial", "(", theta, ",", link, ")")
+	} else if (startsWith(fam, "Tweedie(")) {
+		paste0(substr(fam, 1L, nchar(fam) - 1L), ",link=", link, ")")
 	} else {
+		switch(fam, "scaled t" = "scat",
+			   "Beta regression" = if("putTheta" %in% names(x))
+					"betar" else "beta.regression",
+			   "zero inflated Poisson" = "ziP",
+			   "Cox PH" = "cox.ph",
+			   "Ordered Categorical" = "ocat",
+			   "Multivariate normal" = "mvn",
+			   beta = "beta_family",
+			   )
 		paste0(fam, "(", link, ")")
 	}
 }
