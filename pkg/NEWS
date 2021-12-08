@@ -1,7 +1,9 @@
 MuMIn package news:
 
-Version: 1.44.7 (2021-11-25)
-coefTable/coeffs.glmmTMB: now include "trivial" dispersion parameter
+Version: 1.44.8 (2021-12-08)
+(added) .vcov: an internal wrapper for `vcov` to fix an annoyance of not all 
+    models' methods conforming to standards. .vcov consistently returns a 
+	matrix.
 
 Version: 1.44.6 (2021-05-19)
 added stringsAsFactors=TRUE to most 'as.data.frame' occurences to bring back 

@@ -6,7 +6,7 @@ function(model) {
 
 .vif <-
 function(x) {
-	v <- vcov(x)
+	v <- .vcov(x)
 	nam <- dimnames(v)[[1L]]
 	if(dim(v)[1L] < 2L) return(structure(rep_len(1, dim(v)[1L]),
 										 names = dimnames(v)[[1L]]))

@@ -178,6 +178,7 @@ function(x, ...) {
     x
 }
 
+
 `vcov.averaging` <- 
 function (object, full = FALSE, ...) {
 	## XXX: backward compatibility:
@@ -190,7 +191,7 @@ function (object, full = FALSE, ...) {
 	if(is.null(models)) stop("cannot calculate covariance matrix from ",
 							 "'averaging' object without component models")
 
-	vcovs <- lapply(lapply(models, vcov), as.matrix)
+	vcovs <- lapply(models, .vcov)
 	names.all <- dimnames(object$coefArray)[[3L]]
 	nvars <- length(names.all)
 	nvarseq <- seq(nvars)

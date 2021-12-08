@@ -50,7 +50,7 @@ function(x,
 			for(i in 1L:m)
 				do.call("mtext", c(list(text = as.expression(labels[[i]]),
 					at = i - 0.5), arg))
-		} else if (!is.null(labels) && !is.na(labels)) {
+		} else if(!is.null(labels) && !anyNA(labels)) {
 			if(length(labels) != m)
 				stop("length of 'labels' is not equal to number of terms")
 			do.call("mtext", c(list(text = labels, at = 1L:m - 0.5), arg))
