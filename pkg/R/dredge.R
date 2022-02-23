@@ -10,7 +10,8 @@ expression({
 		beta <- strbeta != "none"
 		betaMode <- (strbeta != "none") + (strbeta == "partial.sd")
 	} else {
-        cry(, "invalid value for 'beta' : the argument is taken to be \"none\"")
+        cry(, "invalid value for 'beta' : the argument is taken to be \"none\"",
+            warn = TRUE)
 		betaMode <- 0L
 		strbeta <- "none"
 	}
