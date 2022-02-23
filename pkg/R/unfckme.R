@@ -39,7 +39,6 @@ function (object, ...) cplm::fixef(object, ...)
 function (object, ...) fixef(object, ...)$cond
 
 
-
 # Consistent sigma (residual standard deviation)
 sigma2 <-
 function(object)
@@ -105,7 +104,7 @@ unclass(VarCorr(object, ...))
 }
 
 
-# Note: currently ONLY FOR CONDITIONAL MODEL
+# Note: only for conditional model
 .varcorr.glmmTMB <- function(object, ...) {
     unclass(VarCorr(object, ...)$cond)
 }
