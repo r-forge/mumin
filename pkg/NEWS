@@ -1,11 +1,10 @@
 MuMIn package news:
 
 Version: 1.46.0 (2022-02-23)
-(fixed) r.squaredGLMM: now calculates correct values for negative binomial and
-    quasipoisson family models (thanks to Shuang Zhang for research)
+(fixed) r.squaredGLMM: now gives correct values for negative binomial models (thanks to Shuang Zhang for research)
 
 Version: 1.45.1 (2021-12-08)
-(added) .vcov: a wrapper for vcov returning result in a consistent format (a matrix)
+(added) .vcov a wrapper for vcov returning result in a consistent format (a matrix)
 
 Version: 1.45.0 (2021-11-25)
 pdredge is deprecated in favour of `dredge` with "cluster" argument.

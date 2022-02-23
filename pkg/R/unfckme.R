@@ -20,6 +20,7 @@ function(object, which = c("cond", "zi", "disp"), ...) {
 }
 
 
+
 .numfixef <- 
 function (object, ...) 
 UseMethod(".numfixef")
@@ -30,38 +31,48 @@ function (object, ...) fixef(object, ...)
 .numfixef.cpglm <- 
 function (object, ...) coef(object, ...)
 
+.numfixef.cpglmm <- 
+function (object, ...) cplm::fixef(object, ...)
+
+
 .numfixef.glmmTMB <- 
 function (object, ...) fixef(object, ...)$cond
 
 
 
-# Consistent sigma /residual standard deviation/
-sigma2 <- 
-function(object) 
+# Consistent sigma (residual standard deviation)
+sigma2 <-
+function(object)
 UseMethod("sigma2")
 
-sigma2.default <- 
-function(object) sigma(object)
+sigma2.default <-
+function(object) {
+    if(startsWith(family(object)$family, "Negative Binomial(")) {
+        get(".Theta", environment(family(object)$aic))
+    } else {
+        sigma(object)
+    }
+}
 
-sigma2.glmmPQL <- 
+sigma2.glmmPQL <-
 function(object) {
     switch(family(object)$family,
         gaussian = , Gamma = object$sigma,
         object$sigma^2
     )
 }
-
-sigma2.glmmTMB <- 
+sigma2.glmmTMB <-
 function(object) {
-    if(family(object)$family == "nbinom1") sigma(object) + 1 
-    else sigma(object)
+    if(family(object)$family == "nbinom1") sigma(object) + 1 else sigma(object)
 }
 
 sigma2.glmerMod <- 
 function(object) {
-    if(startsWith(family(object)$family, "Negative Binomial("))
+    if(startsWith(family(object)$family, "Negative Binomial(")) {
         lme4::getME(object, "glmer.nb.theta")
-    else NextMethod()
+    } else {
+        NextMethod()
+    }
 }
  
     
@@ -73,6 +84,7 @@ UseMethod(".varcorr")
 .varcorr.default <- 
 function(object, ...)
 unclass(VarCorr(object, ...))
+
 
 
 # RE model matrix colnames for models with >1 random formulas are prefixed with

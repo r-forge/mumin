@@ -1,6 +1,7 @@
 
 # code snippet to handle argument 'beta'
-.expr_beta_arg <- expression({
+.expr_beta_arg <- 
+expression({
 	if(is.logical(beta) && beta) {
 		betaMode <- as.integer(beta)
 		strbeta <- if(beta) "sd" else "none"
@@ -9,6 +10,7 @@
 		beta <- strbeta != "none"
 		betaMode <- (strbeta != "none") + (strbeta == "partial.sd")
 	} else {
+        cry(, "invalid value for 'beta' : the argument is taken to be \"none\"")
 		betaMode <- 0L
 		strbeta <- "none"
 	}
@@ -19,7 +21,17 @@ dredge <-
 function(global.model, beta = c("none", "sd", "partial.sd"), evaluate = TRUE, rank = "AICc",
 		 fixed = NULL, m.lim = NULL, m.min, m.max, subset,
 		 trace = FALSE, varying, extra, ct.args = NULL,
+		 deps = attr(allTerms0, "deps"),
+         cluster = NULL,
 		 ...) {
+         
+         
+    if(isTRUE(evaluate) && inherits(cluster, "cluster")) {
+        cl <- match.call()
+        cl[[1L]] <- quote(.dredge.par)
+        return(eval(cl))
+    }
+    
 
 	trace <- min(as.integer(trace), 2L)
 	strbeta <- betaMode <- NULL
@@ -59,13 +71,11 @@ function(global.model, beta = c("none", "sd", "partial.sd"), evaluate = TRUE, ra
 		}
 	}
 	
-	
 	thisCall <- sys.call()
 	exprApply(gmCall[["data"]], NA, function(expr) {
 		if(is.symbol(expr[[1L]]) && all(expr[[1L]] != c("@", "$")))
 			cry(thisCall, "'global.model' uses \"data\" that is a function value: use a variable instead")
 	})
-	
 
 	lik <- .getLik(global.model)
 	logLik <- lik$logLik
@@ -182,7 +192,7 @@ function(global.model, beta = c("none", "sd", "partial.sd"), evaluate = TRUE, ra
 		}
 	}
 
-	deps <- attr(allTerms0, "deps")
+	#deps <- attr(allTerms0, "deps")
 	fixed <- union(fixed, rownames(deps)[rowSums(deps, na.rm = TRUE) == ncol(deps)])
 	fixed <- c(fixed, allTerms[allTerms %in% interceptLabel])
 
@@ -412,10 +422,10 @@ function(global.model, beta = c("none", "sd", "partial.sd"), evaluate = TRUE, ra
 			utils::flush.console()
 		}
 	} else if(trace > 1L) {
-		progressBar <- .progbar(max = ncomb, title = "'dredge' in progress")
+		progressBar <- .progbar(max = ncomb, title = "\"dredge\" working...")
 		on.exit(.closeprogbar(progressBar))
 		function() progressBar(value = iComb,
-			title = sprintf("dredge: %d of %.0f subsets (%d total)", k, (k / iComb) * ncomb, iComb))
+			title = sprintf("dredge: %d of ca. %.0f subsets (%d total)", k, (k / iComb) * ncomb, iComb))
 	} else function() {}
 	
 
@@ -554,7 +564,7 @@ function(global.model, beta = c("none", "sd", "partial.sd"), evaluate = TRUE, ra
 		rval[, nVars + seq_len(nVarying)] <- variants[varlev, ]
 	}
 
-	rval <- as.data.frame(rval)
+	rval <- as.data.frame(rval, stringsAsFactors = TRUE)
 	row.names(rval) <- ord
 
 	# Convert columns with presence/absence of terms to factors

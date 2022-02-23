@@ -34,7 +34,7 @@ echo '<?xml version="1.0" encoding="UTF-8"?>';
 
 <!-- end of project description -->
 
-<p><a href="MuMIn-manual.pdf">Manual in PDF</a></p>
+<!-- <p><a href="MuMIn-manual.pdf">Manual in PDF</a></p> -->
 <p>Install stable version from CRAN (recommended):</p>
 <p><tt style="font-weight:bold; color: #005f8c;">&gt; install.packages("MuMIn")</tt></p>
 
@@ -46,24 +46,6 @@ echo '<?xml version="1.0" encoding="UTF-8"?>';
 
 <p>The <a href="http://<?php echo $domain; ?>/projects/<?php echo $group_name; ?>/"><strong>project summary page</strong></a>. </p>
 
-<hr />
-
-<p>Alternatively, download packages from here (only if above methods did not work):</p>
-
-<?php
-
-$pkg_types = array('tar.gz' => 'Package source', 'zip' => 'Windows zip');
-
-$pattern = "/^MuMIn_(.+)\\.(tar\\.gz|zip)+$/";
-$d = dir(".");
-while (false !== ($entry = $d->read())) {
-	preg_match($pattern, $entry, $matches);
-	if (empty($matches)) continue;
-
-	echo "<div><b>${pkg_types[$matches[2]]}</b>: <a href=\"$entry\">version $matches[1]</a></div>";
-}
-$d->close();
-?> 
 
 </body>
 </html>
