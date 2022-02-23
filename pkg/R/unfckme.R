@@ -20,7 +20,6 @@ function(object, which = c("cond", "zi", "disp"), ...) {
 }
 
 
-
 .numfixef <- 
 function (object, ...) 
 UseMethod(".numfixef")
@@ -36,20 +35,35 @@ function (object, ...) fixef(object, ...)$cond
 
 
 
-# Consistent sigma
-sigma2 <- function(object) UseMethod("sigma2")
-sigma2.default <- function(object) sigma(object)
-sigma2.glmmPQL <- function(object) {
+# Consistent sigma /residual standard deviation/
+sigma2 <- 
+function(object) 
+UseMethod("sigma2")
+
+sigma2.default <- 
+function(object) sigma(object)
+
+sigma2.glmmPQL <- 
+function(object) {
     switch(family(object)$family,
         gaussian = , Gamma = object$sigma,
         object$sigma^2
     )
 }
-sigma2.glmmTMB <- function(object) {
-    if(family(object)$family == "nbinom1") sigma(object) + 1 else sigma(object)
-}
-    
 
+sigma2.glmmTMB <- 
+function(object) {
+    if(family(object)$family == "nbinom1") sigma(object) + 1 
+    else sigma(object)
+}
+
+sigma2.glmerMod <- 
+function(object) {
+    if(startsWith(family(object)$family, "Negative Binomial("))
+        lme4::getME(object, "glmer.nb.theta")
+    else NextMethod()
+}
+ 
     
 # VarCorr wrapper returning consistent format (list of named RE variances) 
 .varcorr <- 
@@ -59,7 +73,6 @@ UseMethod(".varcorr")
 .varcorr.default <- 
 function(object, ...)
 unclass(VarCorr(object, ...))
-
 
 
 # RE model matrix colnames for models with >1 random formulas are prefixed with
