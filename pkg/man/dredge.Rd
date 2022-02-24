@@ -11,7 +11,7 @@
 \title{Automated model selection}
 \description{
 Generate a model selection table of models with combinations (subsets) of fixed 
-effect terms in the global model, with optional rules for model inclusion.
+effect terms in the global model, with optional model inclusion rules.
 }
 
 \usage{
@@ -126,15 +126,14 @@ Note that the number of combinations grows exponentially with the number of
 predictors (\ifelse{latex}{\eqn{2^{N}}}{\ifelse{html}{2ⁿ}{2^N}}, less when
 interactions are present, see below).
 
-The fitted model objects are not stored in the result. To get (possibly a subset of)
+The fitted model objects are not stored in the result. To get (a subset of)
 the models, use \code{\link{get.models}} on the object returned by \code{dredge}.
-Another way of getting all the models is to run 
+Another way to get all the models is to run 
 \code{lapply(dredge(..., evaluate = FALSE), eval)}, 
-which avoids fitting the models twice.
+which avoids fitting models twice.
 
 For a list of model types that can be used as a \code{global.model} see
-\link[=MuMIn-models]{the list of supported models}. Modelling functions not storing
-\code{call} in their result should be evaluated \emph{via} a wrapper function
+\link[=MuMIn-models]{the list of supported models}. Modelling functions that do not store a \code{call} in their result should be evaluated \emph{via} a wrapper function
 created by \code{\link{updateable}}.
 
 \subsection{Information criterion}{
@@ -158,21 +157,19 @@ subset models.
 
 \subsection{Subsetting}{
 There are three ways to constrain the resulting set of models: setting limits to
-the number of terms in a model with \code{m.lim}, binding the
-term(s) to all models with \code{fixed}, and more complex rules can be applied
-using argument \code{subset}. To be included in the selection table, the model
+the number of terms in a model with \code{m.lim}, binding 
+term(s) to all models using \code{fixed}, and the \code{subset} argument can be used for more complex rules. For a model to be included in the selection table, its 
 formulation must satisfy all these conditions.
 
 %%Terms in \code{fixed} argument are applied before the combinations are
 %%generated, therefore more efficient than \code{subset}.
 
-\code{subset} can take either a form of an \emph{expression} or a \emph{matrix}.
-The latter should be a lower triangular matrix with logical values, where
+\code{subset} may be an \emph{expression} or a \emph{matrix}.
+The latter should be a lower triangular matrix with logical values, where the 
 columns and rows correspond to \code{global.model} terms. Value
-\code{subset["a", "b"] == FALSE} will exclude any model containing both terms
-\var{a} and \var{b}. \cr
-\code{demo(dredge.subset)} has examples of using the
-\code{subset} matrix in conjunction with correlation matrices to exclude models
+\code{subset["a", "b"] == FALSE} will exclude any model containing both 
+\var{a} and \var{b} terms. \cr
+\code{demo(dredge.subset)} has examples of using the \code{subset} matrix in conjunction with correlation matrices to exclude models
 containing collinear predictors.
 
 In the form of \code{expression}, the argument \code{subset} acts in a similar
