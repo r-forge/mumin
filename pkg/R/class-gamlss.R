@@ -65,8 +65,10 @@ function(x, intercept = FALSE, offset = TRUE, ...) {
     
 	depslist <- lapply(allterms, attr, "deps")
 	deps <- termdepmat_combine(depslist)
-	colnames(deps) <- rownames(deps) <-
-		paste0(rep(term.prefix, sapply(depslist, ncol)), "(", colnames(deps), ")")
+	if(ncol(deps) != 0L)
+		colnames(deps) <- rownames(deps) <-
+			paste0(rep(term.prefix, sapply(depslist, ncol)),
+				"(", colnames(deps), ")")
 
 	#dimnames(deps) <- list(rval, rval)
 	if(intercept) rval <- c(ints, rval)
