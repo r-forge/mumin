@@ -34,7 +34,7 @@ importFrom("graphics", "axis", "box", "mtext", "par", "plot.new", "plot.window",
 	"rect",	"strheight", "strwidth", "title", "abline", "lines", "matplot", 
     "grconvertX", "grconvertY", "points", "segments")
 
-importFrom("grDevices", "n2mfrow", "col2rgb", "hcl.colors", "hcl.pals", "rgb")
+importFrom("grDevices", "n2mfrow", "col2rgb", "rgb")
 
 importFrom("methods", ".hasSlot", "isGeneric", "slot", "slotNames", "is")
 
