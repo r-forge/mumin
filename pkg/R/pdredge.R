@@ -220,6 +220,8 @@ function(global.model, cluster = NULL,
 	#deps <- attr(allTerms0, "deps")
 	fixed <- union(fixed, rownames(deps)[rowSums(deps, na.rm = TRUE) == ncol(deps)])
 	fixed <- c(fixed, allTerms[allTerms %in% interceptLabel])
+    fixed <- fixed[!duplicated(fixed)]
+
 
 	nFixed <- length(fixed)
 	if(nFixed != 0L) message(sprintf(ngettext(nFixed, "Fixed term is %s", "Fixed terms are %s"),

@@ -1,6 +1,10 @@
 MuMIn package news:
 
 Version: 1.46.4 (2022-06-07)
+(fixed) dredge: in a rare case when intercept terms were passed as fixed, 
+    some variable combinations were erroneously dropped from the result. 
+
+Version: 1.46.4 (2022-06-07)
 (fixed) getAllTerms.gamlss: error with intercept only models and formulas
     containing offset (reported multiple times on Stackoverflow)
 
