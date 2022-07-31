@@ -1,12 +1,17 @@
 MuMIn package news:
 
-Version: 1.46.4 (2022-06-07)
-(fixed) dredge: in a rare case when intercept terms were passed as fixed, 
-    some variable combinations were erroneously dropped from the result. 
+Version: 1.46.6 (2022-07-31)
+(fixed) print.model.selection: Abbreviations now only include existing values 
+    (i.e. after subsetting).
+(fixed) merge.model.selection: "modelList" attributes are now preserved.
 
-Version: 1.46.4 (2022-06-07)
+Version: 1.46.5 (2022-06-07)
 (fixed) getAllTerms.gamlss: error with intercept only models and formulas
     containing offset (reported multiple times on Stackoverflow)
+
+Version: 1.46.4 (2022-06-07)
+(fixed) dredge: in a rare case when intercept terms were passed as "fixed", 
+    some variable combinations were erroneously dropped from the result. 
 
 Version: 1.46.0 (2022-02-23)
 (fixed) r.squaredGLMM: now gives correct values for negative binomial models
