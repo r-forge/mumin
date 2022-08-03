@@ -13,7 +13,7 @@ if (MuMIn:::testStart("survival")) {
     coef(fmcph)
 
     ms <- dredge(fmcph, fixed=c("strata(enum)"), 
-        extra = list(R2 = "r.squared.coxph"), evaluate = FALSE)
+        extra = list(R2 = "r.squared.coxph"), trace = TRUE)
 
 
     # BUG in survival
