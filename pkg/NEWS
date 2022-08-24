@@ -1,5 +1,9 @@
 MuMIn package news:
 
+Version: 1.46.7 (2022-08-24)
+Rd files have been updated to meet changes in the HTML R help system, starting
+    with R 4.2.0. Hence, the minimum required version of R is now 4.2.0.
+
 Version: 1.46.6 (2022-07-31)
 (fixed) print.model.selection: Abbreviations now only include existing values 
     (i.e. after subsetting).
