@@ -2,7 +2,7 @@
 function (..., deparse.level = 1, make.row.names = TRUE) {
 	
   	n <- ...length()
-	if(n == 1L) return(..elt(1L))
+	if(n == 1L) return(...elt(1L))
     
     items <- list(...)
 
