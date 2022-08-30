@@ -1,5 +1,13 @@
 MuMIn package news:
 
+Version: 1.47.0 (2022-08-30)
+(changed) plot.model.selection: Most notable change is the way the 
+    'col' argument is interpreted. The default colours use now 
+    `hcl.palette` and differ from the previous version. There is no backward 
+    compatibility.
+Long defunct `mod.sel`, `tTable` and `updateable2` have been removed.
+    `importance` is now defunct (use `sw` instead).
+
 Version: 1.46.7 (2022-08-24)
 Rd files have been updated to meet changes in the HTML R help system, starting
     with R 4.2.0. Hence, the minimum required version of R is now 4.2.0.
@@ -47,10 +55,6 @@ Version: 1.44.2 (2020-07-14)
     response.
 
 Version: 1.44.1 (2020-06-25)
-plot.model.selection: has been modified. Most notable change is the way the 
-    colour argument is interpreted. Also the default colours use now 
-    `hcl.palette` and differ from the previous version. There is no backward 
-    compatibility.
 importance: is now formally deprecated with a warning. Use `sw` instead.
 
 Version: 1.44.0 (2020-05-28)

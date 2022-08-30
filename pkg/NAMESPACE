@@ -23,10 +23,7 @@ export(
 	"bootWeights",
 	"loo",
 	
-    "coefplot",
-    
-    # defunct and deprecated:
-	"mod.sel",  "tTable", "updateable2"
+    "coefplot"
 )
 
 # Imports:
@@ -34,7 +31,7 @@ importFrom("graphics", "axis", "box", "mtext", "par", "plot.new", "plot.window",
 	"rect",	"strheight", "strwidth", "title", "abline", "lines", "matplot", 
     "grconvertX", "grconvertY", "points", "segments")
 
-importFrom("grDevices", "n2mfrow", "col2rgb", "rgb")
+importFrom("grDevices", "n2mfrow", "col2rgb", "hcl.colors", "hcl.pals", "rgb")
 
 importFrom("methods", ".hasSlot", "isGeneric", "slot", "slotNames", "is")
 

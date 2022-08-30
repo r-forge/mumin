@@ -17,12 +17,9 @@
     regMethodsOnPkgAttach <-   
     function(pkgName, funname, classname, s4 = FALSE)
         asNeeded(pkgName, function(...) for(a in classname) regmethod(funname, a, s4))
-
-   
+	    
     regMethodsOnPkgAttach("unmarked", "logLik", "unmarkedFit", TRUE)
     regMethodsOnPkgAttach("nlme", "predict", c("lme", "gls"))
-   
-	### Done here and not in NAMESPACE as I don't want to link to xtable:
     regMethodsOnPkgAttach("xtable", "xtable", 
         c("summary.averaging", "averaging", "model.selection"))
  
