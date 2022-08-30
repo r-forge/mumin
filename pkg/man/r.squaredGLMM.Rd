@@ -126,17 +126,17 @@ Nakagawa et al. (2017).
 }
 
 \references{
-Nakagawa, S., Schielzeth, H. (2013) A general and simple method for obtaining
+Nakagawa, S., Schielzeth, H. 2013 A general and simple method for obtaining
 \Rsq from Generalized Linear Mixed-effects Models. \emph{Methods in
-Ecology and Evolution} 4: 133–142
+Ecology and Evolution} \bold{4}, 133--142.
 
-Johnson, P.C.D. (2014) Extension of Nakagawa & Schielzeth’s \Rsqx{GLMM} to random 
-slopes models. \emph{Methods in Ecology and Evolution} 5: 44-946
+Johnson, P. C. D. 2014 Extension of Nakagawa & Schielzeth’s \Rsqx{GLMM} to random 
+slopes models. \emph{Methods in Ecology and Evolution} \bold{5}, 44--946.
 
-Nakagawa, S., Johnson, P.C.D., Schielzeth, H. (2017) The coefficient of
+Nakagawa, S., Johnson, P. C. D., Schielzeth, H. 2017 The coefficient of
 determination \Rsq and intra-class correlation coefficient from generalized
 linear mixed-effects models revisited and expanded.
-\emph{J. R. Soc. Interface} 14: 20170213.
+\emph{J. R. Soc. Interface} \bold{14}, 20170213.
 
 }
 

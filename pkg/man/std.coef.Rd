@@ -81,15 +81,14 @@ Fox.
 }
 
 \references{
+Cade, B.S. 2015 Model averaging and muddled multimodel inferences. 
+    \emph{Ecology} \bold{96}, 2370-2382.
 
-Cade, B.S. (2015) Model averaging and muddled multimodel inferences. 
-    \emph{Ecology} 96, 2370-2382.
-
-Afifi A., May S., Clark V.A. (2011) \emph{Practical Multivariate Analysis},
+Afifi, A., May, S., Clark, V.A. 2011 \emph{Practical Multivariate Analysis},
 Fifth Edition. CRC Press.
 
-Bring, J. (1994). How to standardize regression coefficients. \emph{The American
-Statistician} 48, 209-213.
+Bring, J. 1994 How to standardize regression coefficients. \emph{The American
+Statistician} \bold{48}, 209--213.
 }
 
 \seealso{

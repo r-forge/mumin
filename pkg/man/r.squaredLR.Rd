@@ -104,14 +104,14 @@ criteria.
 
 \references{
 
-Cox, D. R. and Snell, E. J. (1989) \emph{The analysis of binary data}, 2nd ed.
-London, Chapman and Hall
+Cox, D. R. and Snell, E. J. 1989 \emph{The analysis of binary data}, 2nd ed.
+London, Chapman and Hall.
 
-Magee, L. (1990) \Rsq measures based on Wald and likelihood ratio joint
-significance tests. \emph{Amer. Stat.} 44: 250-253
+Magee, L. 1990 \Rsq measures based on Wald and likelihood ratio joint
+significance tests. \emph{Amer. Stat.} \bold{44}, 250--253.
 
-Nagelkerke, N. J. D. (1991) A note on a general definition of the coefficient of
-determination. \emph{Biometrika} 78: 691-692
+Nagelkerke, N. J. D. 1991 A note on a general definition of the coefficient of
+determination. \emph{Biometrika} \bold{78}, 691--692.
 }
 
 \seealso{

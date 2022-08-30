@@ -5,22 +5,13 @@
 \usage{
 \method{plot}{model.selection}(
   x,
-  ylab = NULL,
-  xlab = NULL,
-  main = "Model selection table",
-  labels = NULL,
-  terms = NULL,
-  labAsExpr = TRUE,
-  vlabels = rownames(x),
-  mar.adj = TRUE,
-  col = NULL,
-  col.mode = 2,
-  bg = "white",
-  border = par("col"),
-  par.lab = NULL,
-  par.vlab = NULL,
-  axes = TRUE,
-  ann = TRUE,
+  ylab = NULL, xlab = NULL, main = "Model selection table",
+  labels = NULL, terms = NULL, labAsExpr = TRUE,
+  vlabels = rownames(x), mar.adj = TRUE,
+  col = NULL, col.mode = 2,
+  bg = "white", border = par("col"),
+  par.lab = NULL, par.vlab = NULL,
+  axes = TRUE, ann = TRUE,
   ...
 )
 }
@@ -73,7 +64,8 @@ should appear on the plot.}
 Produces a graphical representation of model weights and terms.
 }
 \details{
-@section Colours
+\subsection{Colours}{
+
 If \code{col.mode = 0}, the colours are recycled: if \code{col} is a matrix,
 recycling takes place both per row and per column. If \code{col.mode > 0}, the
 colour values in the columns are interpolated and assigned according to
@@ -82,18 +74,33 @@ model weights more forward. See also \code{\link{colorRamp}}. If \code{col.mode 
 \code{"value"} (partially matched, case-insensitive) and \code{col} has two or more
 elements, colours are used to represent coefficient values: the first
 element in \code{col} is used for categorical predictors, the rest for
-continuous values. The default is \code{grey} for factors and \code{"Blue-Red 3"}
-\link[=`hcl.colors`]{HCL palette} otherwise, ranging from blue for negative
-values to red for positive ones.
+continuous values. The default is \code{grey} for factors and
+\link[=`hcl.colors`]{HCL palette} \code{"Blue-Red 3"} otherwise, ranging from blue
+for negative values to red for positive ones.
+}
+
 The following arguments are useful for adjusting label size and
 position in \code{par.lab} and \code{par.vlab} : \code{cex}, \code{las} (see \code{\link{par}}),
 \code{line} and \code{hadj} (see \code{\link{mtext}} and \code{\link{axis}}).
 }
 \examples{
-# For examples, see \sQuote{[MuMIn-package]}
+\dontshow{if (require(graphics)) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+dd <- dredge(lm(formula = y ~ ., data = Cement, na.action = na.fail))
+plot(dd,
+    # colours by coefficient value:
+    col.mode = "value",
+    par.lab = list(las = 2, line = 1.2, cex = 1),
+    bg = "gray30",
+    # change labels for the models to Akaike weights:
+    vlabels = parse(text = paste("omega ==", round(Weights(dd), 2)))
+    )
+plot(dd, col = 2:3, col.mode = 0) # colour recycled by row
+plot(dd, col = cbind(2:3, 4:5), col.mode = 0) # colour recycled by row and column
+plot(dd, col = 2:3, col.mode = 1) # colour gradient by model weight
+\dontshow{\}) # examplesIf}
 }
 \seealso{
-\code{\link{plot.default}}, \code{\link{par}}
+\code{\link{plot.default}}, \code{\link{par}}, \code{\link{MuMIn-package}}
 }
 \author{
 Kamil Barto\enc{ń}{n}
