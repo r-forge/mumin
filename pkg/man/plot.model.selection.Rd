@@ -75,7 +75,7 @@ model weights more forward. See also \code{\link{colorRamp}}. If \code{col.mode 
 elements, colours are used to represent coefficient values: the first
 element in \code{col} is used for categorical predictors, the rest for
 continuous values. The default is \code{grey} for factors and
-\link[=`Palettes`]{HCL palette} \code{"Blue-Red 3"} otherwise, ranging from blue
+\link[=`Palettes`]{\code{"Blue-Red 3"} palette} otherwise, ranging from blue
 for negative values to red for positive ones.
 }
 
