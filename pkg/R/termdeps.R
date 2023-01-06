@@ -93,6 +93,6 @@ formula2idx <- function(x, asCall = TRUE) {
 }
 
 formula_margin_check <- function(j, m) {
-	stopifnot(is.logical(j))
+	mode(j) <- "logical"
 	!any(m[!j, j], na.rm = TRUE)
 }
