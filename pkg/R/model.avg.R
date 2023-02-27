@@ -168,12 +168,15 @@ function(object, ..., beta = c("none", "sd", "partial.sd"),
 	}
 	
 	.DebugPrint(coefTableCall)
-
+	
 	# check if models are unique:
 	if(!is.null(dispersion)) dispersion <- rep(dispersion, length.out = nModels)
 	coefTables <- vector(nModels, mode = "list")
-	for(i in seq_len(nModels))
-		coefTables[[i]] <-  eval(coefTableCall)
+	for(i in seq_len(nModels)) {
+		coefTables[[i]] <- eval(coefTableCall)
+		rownames(coefTables[[i]]) <- fixCoefNames(rownames(coefTables[[i]]))
+	}
+	
 	
 	mcoeffs <- lapply(coefTables, "[", , 1L)
 	dup <- unique(sapply(mcoeffs, function(i) which(sapply(mcoeffs, identical, i))))

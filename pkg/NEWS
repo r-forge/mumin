@@ -1,5 +1,10 @@
 MuMIn package news:
 
+Changes in version 1.43.16 (2023-27-02)
+- (fixed) model.avg.default: duplicated interaction coefficients were returned
+  when the main effect coefficients appeared in different order in the 
+  component models (spotted by Derek Corcoran).
+
 Changes in version 1.47.2 (2023-01-06)
 - Updated methods for models of class 'Sarlm' and 'Spautolm' from the 
   package 'spatialreg' (reported by Iwona Dembicz)
