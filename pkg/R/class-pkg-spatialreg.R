@@ -4,7 +4,7 @@ function (object, ...)
 
 nobs.Sarlm <-
 function (object, ...)
-   length(residuals(object))
+   length(resid(object))
 
 coefTable.Sarlm <-
 coefTable.Spautolm <-
