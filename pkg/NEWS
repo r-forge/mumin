@@ -1,6 +1,6 @@
 MuMIn package news:
 
-Changes in version 1.43.16 (2023-27-02)
+Changes in version 1.47.3 (2023-02-27)
 - (fixed) model.avg.default: duplicated interaction coefficients were returned
   when the main effect coefficients appeared in different order in the 
   component models (spotted by Derek Corcoran).
