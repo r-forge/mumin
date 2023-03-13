@@ -12,3 +12,4 @@ function (model, ...) {
     cf <- summary(model)$Coef
     .makeCoefTable(cf[, 1L], cf[, 2L])
 }
+
