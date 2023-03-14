@@ -2,56 +2,54 @@
 # general function
 r2glmm <-
 function(family, vfe, vre, vol, link, pmean, lambda, omega, n) {
-    
-    #message("lambda=", lambda)
-    #message("omega=", omega)
-    
+
     if(inherits(family, "family")) {
         link <- family$link
         family <- family$family
     }
     
     if(missing(vol) || !is.numeric(vol) || is.na(vol))
-    vol <- switch(paste(family, link, sep = "."),
-        gaussian.identity = vol,
-        quasibinomial.logit =,
-        binomial.logit = c(
-            theoretical = 3.28986813369645 / n,
-            delta = 1 / (n * pmean * (1 - pmean))
-            ),
-        quasibinomial.probit =,
-        binomial.probit = c(
-            theoretical = 1 / n,
-            delta =
-                6.2831853071795862 / n * pmean * (1 - pmean) *
-                    exp((qnorm(pmean) / 1.4142135623730951)^2)^2
-            ),
-        quasibinomial.cloglog =,
-		binomial.cloglog = c(
-			theoretical = 1.6449340668482264 / n,  #  pi^2 / 6
-			delta = pmean / n / log(1 - pmean)^2 / (1 - pmean)
-			),
-		Gamma.log =, poisson.log =, quasipoisson.log =, nbinom1.log = c(
-			delta = omega / lambda,
-			lognormal = log1p(omega / lambda),
-			trigamma = trigamma(lambda / omega)
-			),
-        quasipoisson.sqrt =, nbinom1.sqrt =,
-        "poisson.mu^0.5" =, poisson.sqrt = c(
-            delta = 0.25 * omega
-            ),
-        nbinom2.log = {
-            vdelta <- (1 / lambda) + (1 / omega)
-            c(
-            delta = vdelta,
-            lognormal =  log1p(vdelta),
-            trigamma = trigamma(1 / vdelta)
-            )},
-		Gamma.inverse =, # c( delta = 1 / nu / lambda^2 ),
-        NotImplementedFamily =
-            stop("not implemented yet for ", family, " and ", link),
-        cry(sys.call(-1L), "do not know how to calculate variance for %s(%s)", family, dQuote(link))
-    )
+		vol <- switch(paste(family, link, sep = "."),
+			gaussian.identity = vol,
+			quasibinomial.logit =,
+			binomial.logit = c(
+				theoretical = 3.28986813369645 / n,
+				delta = 1 / (n * pmean * (1 - pmean))
+				),
+			quasibinomial.probit =,
+			binomial.probit = c(
+				theoretical = 1 / n,
+				delta =
+					6.2831853071795862 / n * pmean * (1 - pmean) *
+						exp((qnorm(pmean) / 1.4142135623730951)^2)^2
+				),
+			quasibinomial.cloglog =,
+			binomial.cloglog = c(
+				theoretical = 1.6449340668482264 / n,  #  pi^2 / 6
+				delta = pmean / n / log(1 - pmean)^2 / (1 - pmean)
+				),
+			Gamma.log =, poisson.log =, quasipoisson.log =, nbinom1.log = c(
+				delta = omega / lambda,
+				lognormal = log1p(omega / lambda),
+				trigamma = trigamma(lambda / omega)
+				),
+			quasipoisson.sqrt =, nbinom1.sqrt =,
+			"poisson.mu^0.5" =, poisson.sqrt = c(
+				delta = 0.25 * omega
+				),
+			nbinom2.log = {
+				vdelta <- (1 / lambda) + (1 / omega)
+				c(
+				delta = vdelta,
+				lognormal =  log1p(vdelta),
+				trigamma = trigamma(1 / vdelta)
+				)},
+			Gamma.inverse =, # c( delta = 1 / nu / lambda^2 ),
+			NotImplementedFamily =
+				stop("not implemented yet for ", family, " and ", link), {
+			cry(sys.call(-1L), "do not know how to calculate variance for %s(%s)", family, dQuote(link))
+				}
+			)
 	
 	vtot <- sum(vfe, vre)
 	matrix(c(vfe, vtot) / (vtot + rep(vol, each = 2L)),
@@ -125,11 +123,7 @@ function(object, null, envir = parent.frame(), pj2014 = FALSE, ...) {
         vt <- .varRESum(.varcorr(null), mmRE)
         lambda <- unname(exp(fixefnull + 0.5 * vt))
         theta <- sigma2(object)
-        
-        #koBrowseHere()
-
         r2glmm(familyName, varFE, varRE, lambda = lambda, omega = theta, link = fam$link)
-
     }, Gamma = {
         nu <- sigma2(object)^-2
         omega <- 1
@@ -161,7 +155,10 @@ function(object, null, envir = parent.frame(), pj2014 = FALSE, ...) {
                 vol = log1p(1 / exp(mean(fitted))) + varresid)[1L, ], rval)
         }
         rval
-    }, r2glmm(fam, varFE, varRE))
+    }, {
+	    #message("using 'insight::get_variance_residual'")
+		r2glmm(fam, varFE, varRE, insight::get_variance_residual(object))
+	})
 }
 
 

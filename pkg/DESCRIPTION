@@ -1,8 +1,8 @@
 Package: MuMIn
 Type: Package
 Title: Multi-Model Inference
-Version: 1.47.4
-Date: 2023-03-13
+Version: 1.47.5
+Date: 2023-03-14
 Encoding: UTF-8
 Author: Kamil Bartoń
 Maintainer: Kamil Bartoń <kamil.barton@go2.pl>
@@ -13,7 +13,7 @@ Description: Tools for performing model selection and model averaging. Automated
              (AICc and alike) or custom model weighting schemes.
 License: GPL-2
 Depends: R (>= 4.2.0)
-Imports: graphics, methods, Matrix, stats, stats4, nlme 
+Imports: graphics, methods, Matrix, stats, stats4, nlme, insight
 Suggests: lme4 (>= 1.1.0), mgcv (>= 1.7.5), gamm4, MASS, nnet, 
           survival (>= 3.1.0), geepack
 Enhances: aod, aods3, betareg, caper, coxme, cplm, gee, glmmML, logistf, 
