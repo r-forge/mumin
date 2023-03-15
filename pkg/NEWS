@@ -1,9 +1,13 @@
 MuMIn package news:
 
 
-Changes in version 1.47.5 (2023-03-14)
+Changes in version 1.47.5 (2023-03-15)
 - r.squaredGLMM: added support for additional families using 
-  insight::get_variance
+  insight::get_variance. This requires the addition of 'insight' to the package 
+  dependencies, something done very reluctantly as, as a principle with MuMIn, 
+  new dependencies are only added as a last resort.
+- null.fit and hence r.squaredLR now work also with "survreg" class (reported by
+  Caroline Zanchi).
 
 Changes in version 1.47.4 (2023-03-13)
 - (fixed) removed remaining references to stats:::format.perc
