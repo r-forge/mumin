@@ -88,10 +88,12 @@ function(x, peel = TRUE) {
 			ixi <- substring(ixi, pos + 1L)
 		} else {
 			# unmarkedFit with its phi(...), lambda(...) etc...
-			if(peel <- all(endsWith(ixi, ")"))) {
+			if(peel <- all(endsWith(x, ")"))) {
 				# only if 'XXX(...)', i.e. exclude 'XXX():YYY()' or such
-				m <- regexpr("^(([^()]*)\\(((?:[^()]*|(?1))*)\\))$", ixi, perl = TRUE, useBytes = TRUE)
-				cptgrps <- .matches(ixi, m)
+                # assumes coefficient types are ascii letters only 
+                # and of length >= 2
+				m <- regexpr("^(([a-zA-Z]{2,5})\\(((?:[^()]*|(?1))*)\\))$", ixi, perl = TRUE, useBytes = TRUE)
+                cptgrps <- .matches(ixi, m)
 				if(peel <- all(cptgrps[, 2L] != "")) {
 					peelpfx <- paste0(cptgrps[, 2L], "(")
 					peelsfx <- ")"

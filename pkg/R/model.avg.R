@@ -164,8 +164,7 @@ function(object, ..., beta = c("none", "sd", "partial.sd"),
 		coefTableCall[[a]] <- ct.args[[a]]
 		
 
- 
-    # NOTE: arguments in coefTableCall: "m" for model, "d" for dispersion
+    # NOTE: first argument in coefTableCall is "m" and "d" for dispersion
 	coefTables <-
 	    mapply(function(m, d) {
 	        rval <- eval(coefTableCall)
@@ -174,6 +173,7 @@ function(object, ..., beta = c("none", "sd", "partial.sd"),
 	    }, m = models, d = if(is.null(dispersion)) NA else dispersion,
 			SIMPLIFY = FALSE)
 	
+
 	
 	# check if models are unique:
 	mcoeffs <- lapply(coefTables, "[", , 1L)
@@ -227,6 +227,7 @@ function(object, ..., beta = c("none", "sd", "partial.sd"),
 		
     names(all.terms) <- seq_along(all.terms)
 	colnames(mstab)[3L] <- ICname
+
 
 	vpresent <- do.call("rbind", lapply(models, function(x)
 		all.terms %in% getAllTerms(x)))
@@ -311,15 +312,4 @@ function(object, full, warn = TRUE) {
 					 warn = TRUE)
 		return(TRUE)
 	} else return(full)
-}
-
-## XXX: backward compatibility (< 0.15.0):
-upgrade_averaging_object <-
-function(x) {
-	if(is.matrix(x$coefficients)) return(x)
-	if(all(c("coefTable", "coef.shrinkage") %in% names(x))) {
-		x$coefficients <- rbind(full = x$coef.shrinkage, subset = x$coefTable[, 1L])
-		x$coefTable <- NULL
-	} else stop("'averaging' object is corrupt")
-	x
 }

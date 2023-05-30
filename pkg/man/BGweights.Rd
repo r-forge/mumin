@@ -21,7 +21,7 @@ case of other model types \code{update} is always used.}
 A numeric vector of model weights.
 }
 \description{
-Computes empirical weights based on out of sample forecast variances,
+Compute empirical weights based on out of sample forecast variances,
 following Bates and Granger (1969).
 }
 \details{
