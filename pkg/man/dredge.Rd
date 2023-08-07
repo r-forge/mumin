@@ -47,7 +47,8 @@ dredge(global.model, beta = c("none", "sd", "partial.sd"), evaluate = TRUE,
 	See \sQuote{Details}. }
 
 	\item{fixed}{optional, either a single-sided formula or a character vector
-	giving names of terms to be included in all models. See \sQuote{Subsetting}. }
+	giving names of terms to be included in all models. Not to be confused with
+    fixed effects. See \sQuote{Subsetting}. }
 
 	\item{m.lim, m.max, m.min}{optionally, the limits \code{c(lower, upper)}
     for the number of terms in a single model (excluding the intercept). An
@@ -55,8 +56,9 @@ dredge(global.model, beta = c("none", "sd", "partial.sd"), evaluate = TRUE,
     Specifying limits as \code{m.min} and \code{m.max} is allowed for backward
     compatibility. }
 
-	\item{subset}{ logical expression describing models to keep in the resulting
-		set. See \sQuote{Subsetting}. }
+	\item{subset}{logical expression or a \code{matrix} describing models to 
+        be kept in the resulting set. \code{NULL} or \code{TRUE} 
+        disables subsetting. For details, see \sQuote{Subsetting}. }
 
 	\item{trace}{if \code{TRUE} or \code{1}, all calls to the fitting function
 	are printed before actual fitting takes place. If \code{trace > 1}, a progress bar
@@ -101,10 +103,10 @@ dredge(global.model, beta = c("none", "sd", "partial.sd"), evaluate = TRUE,
         attribute \code{"deps"}. Can be used to fine-tune marginality 
         exceptions. }
 
-  \item{cluster}{ if a valid \code{"cluster"} object is provided it is used for
-       parallel execution of the fitting function. If \code{NULL} or omitted 
-       single threaded execution is performed.
-       
+  \item{cluster}{ if a valid \code{"cluster"} object is given, it is used for
+       parallel execution. If \code{NULL} or omitted, execution is 
+       single-threaded.
+
        With parallel calculation, an extra argument \code{check} is accepted.
        
        See \code{\link{pdredge}} for details and examples.

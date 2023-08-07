@@ -171,12 +171,14 @@ function(object, null, ...) r.squaredGLMM.merMod(object, null, ...)
 
 `r.squaredGLMM.glmmTMB` <-
 function(object, null, envir = parent.frame(), ...) {
-    w <- c(fixef(object)$zi != 0L,
-        !identical(object$modelInfo$allForm$dispformula, ~0,
-			ignore.environment = TRUE))
-    if(any(w)) warning("the effects of ",
-        prettyEnumStr(c("zero-inflation", "dispersion model"),
-			quote = FALSE), " are ignored")
+    has.components <- vapply(fixef(object), 
+        function(x) length(x) != 0L && (length(x) != 1L || 
+            names(x)[1L] != "(Intercept)"), logical(1L))
+    if(any(has.components[c("zi", "disp")])) 
+        warning("effects of ",
+        prettyEnumStr(c("zero-inflation", "dispersion model")[
+            has.components[c("zi", "disp")]
+            ], quote = FALSE), " are ignored")
     r.squaredGLMM.merMod(object, null, envir, ...)
 }
 

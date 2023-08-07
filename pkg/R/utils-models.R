@@ -71,6 +71,8 @@ function (x, m) {
 # if 'peel', tries to remove coefficients wrapped into function-like syntax
 # (this is meant mainly for 'unmarkedFit' models with names such as "psi(a:b:c)")
 # This unwrapping is done only if ALL names are suitable for it.
+# FIXME: this function would also "fix" strings like "log(b:a)" (but not 
+# "log(`b:a`)") - but this is unlikely to be a valid model term.
 `fixCoefNames` <-
 function(x, peel = TRUE) {
 	if(!length(x)) return(x)
@@ -88,7 +90,7 @@ function(x, peel = TRUE) {
 			ixi <- substring(ixi, pos + 1L)
 		} else {
 			# unmarkedFit with its phi(...), lambda(...) etc...
-			if(peel <- all(endsWith(x, ")"))) {
+			if(peel <- all(grepl("^[a-zA-Z]{2,5}\\(.+\\)$", x, perl = TRUE))) {
 				# only if 'XXX(...)', i.e. exclude 'XXX():YYY()' or such
                 # assumes coefficient types are ascii letters only 
                 # and of length >= 2

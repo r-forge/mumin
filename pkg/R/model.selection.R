@@ -136,3 +136,10 @@ names(x)[type2col(x, type)]
 
 `itemByType<-` <- function(x, type, i, value)
 `[<-.data.frame`(x, i, type2col(x, type), value)
+
+
+duplicated.model.selection <-
+function (x, incomparables = FALSE, fromLast = FALSE, ...) {
+    duplicated.data.frame(x[, type2col(x, c("loglik", "terms"))],
+        incomparables = incomparables, fromLast = fromLast, ...)
+}

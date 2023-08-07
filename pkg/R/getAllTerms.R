@@ -1,3 +1,10 @@
+#TODO
+## "intercept" -> give actual indices instead of 0,1
+## "term.type" -> with >1 formulas or multi-sided formulas, vector of term 
+##                type names (factor?). Along with that, original names
+## list of component terms in case of interactions
+## match terms, "=="  
+
 `getAllTerms.default` <-
 #function(x, ...) getAllTerms.formula(as.formula(formula(x)), ...)
 function(x, ...) getAllTerms.terms(terms(as.formula(formula(x))), ...)
@@ -89,7 +96,7 @@ function(x, intercept = FALSE, offset = TRUE, ...) {
 	response <- attr(x, "response")
 	response <- if(response == 0L) NULL else variables[[response]]
 	attr(ans, "response") <- response
-	attr(ans, "order") <- order(ord)
+	attr(ans, "sortorder") <- order(ord)
 	attr(ans, "deps") <- deps
 	ans
 }
@@ -176,7 +183,7 @@ function(x, intercept = FALSE, ...) {
 
 	deps <- termdepmat_combine(lapply(z, attr, "deps"))
 
-	ord <- unlist(lapply(z, attr, "order"))
+	ord <- unlist(lapply(z, attr, "sortorder"))
 	n <- sapply(z, length)
 	if(length(z) > 1L) ord[-j] <- ord[-(j <- seq_len(n[1L]))] + n[1L]
 		
@@ -201,7 +208,7 @@ function(x, intercept = FALSE, ...) {
 	attr(ret, "intercept") <- pmin(which(interceptIdx), 1)
 	attr(ret, "interceptLabel") <- zz[interceptIdx]
 	attr(ret, "response") <- attr(z[[1L]], "response")
-	attr(ret, "order") <- if(!intercept) order(ord[!interceptIdx]) else ord
+	attr(ret, "sortorder") <- if(!intercept) order(ord[!interceptIdx]) else ord
 	attr(ret, "deps") <- deps
 	ret
 }
@@ -217,7 +224,7 @@ function(x, intercept = FALSE, ...) {
 	
 	deps <- termdepmat_combine(lapply(z, attr, "deps"))
 	
-	ord <- unlist(lapply(z, attr, "order"))
+	ord <- unlist(lapply(z, attr, "sortorder"))
 	n <- sapply(z, length)
 	if(length(z) > 1L) ord[-j] <- ord[-(j <- seq_len(n[1L]))] + n[1L]
 	zz <- unlist(z)
@@ -236,7 +243,7 @@ function(x, intercept = FALSE, ...) {
 	attr(ret, "intercept") <- pmin(which(interceptIdx), 1)
 	attr(ret, "interceptLabel") <- zz[interceptIdx]
 	attr(ret, "response") <- attr(z[[1L]], "response")
-	attr(ret, "order") <- if(!intercept) order(ord[!interceptIdx]) else ord
+	attr(ret, "sortorder") <- if(!intercept) order(ord[!interceptIdx]) else ord
 	attr(ret, "deps") <- deps
 	ret
 }
@@ -304,8 +311,9 @@ function (x, intercept = FALSE, ...) {
 	for(a in c("intercept", "interceptLabel")) {
 		attr(retval, a) <-	unlist(sapply(alltermlist, attr, a))
 	}
-	attr(retval, "order") <- order(rep(seq_along(alltermlist), vapply(alltermlist, length, 1L)),
-		unlist(lapply(alltermlist, attr, "order")))
+	attr(retval, "sortorder") <- 
+        order(rep(seq_along(alltermlist), vapply(alltermlist, length, 1L)),
+		unlist(lapply(alltermlist, attr, "sortorder")))
 	attr(retval, "deps") <- termdepmat_combine(lapply(alltermlist, attr, "deps"))
 	retval
 }

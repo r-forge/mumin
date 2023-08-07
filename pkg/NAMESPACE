@@ -2,7 +2,7 @@
 export(
 	"dredge", "pdredge", "get.models", "pget.models", 
 	"model.avg", "par.avg", 
-	"model.sel",
+	"model.sel", "model.sel<-",
 	"getAllTerms", "coeffs", "coefTable", 
 	"sw", "importance", "Weights", "Weights<-",
 	"AICc", "QAIC", "QAICc", "Cp", "ICOMP", "CAICF", "DIC", 
@@ -92,6 +92,7 @@ S3method(rbind, model.selection)
 S3method(update, model.selection)
 S3method(coef, model.selection)
 S3method(logLik, model.selection)
+S3method(duplicated, model.selection)
 
 S3method(model.sel, model.selection)
 S3method(model.sel, default)

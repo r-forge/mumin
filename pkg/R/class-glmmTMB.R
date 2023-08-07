@@ -37,13 +37,14 @@ function(x, intercept = FALSE, offset = TRUE, ...) {
 	dimnames(deps) <- list(depnames, depnames)
     intLabel <- paste0(names(attrInt[attrInt != 0L]), "((Int))")
 
-	ord <- lapply(at, attr, "order")
-	ordl <- vapply(ord, length, 0, USE.NAMES = FALSE)
-	ord <- unlist(ord, use.names = FALSE) + rep(c(0, ordl[-length(ordl)]), ordl)
+	sortorder <- lapply(at, attr, "sortorder")
+	sortorderl <- vapply(sortorder, length, 0, USE.NAMES = FALSE)
+	sortorder <- unlist(sortorder, use.names = FALSE) + 
+        rep(c(0, sortorderl[-length(sortorderl)]), sortorderl)
 	
 	if(intercept) {
 		rval <- c(intLabel, rval)
-		ord <- c(seq.int(along.with = intLabel), ord + length(intLabel))
+		sortorder <- c(seq.int(along.with = intLabel), sortorder + length(intLabel))
 	}
 	
 	if(hasOffset) attr(rval, "offset") <- offsetTerm
@@ -59,7 +60,7 @@ function(x, intercept = FALSE, offset = TRUE, ...) {
 	attr(rval, "random.terms") <- rt
 	attr(rval, "random") <- random
 	attr(rval, "response") <- attr(at$cond, "response") 
-	attr(rval, "order") <- ord
+	attr(rval, "sortorder") <- sortorder
     attr(rval, "intercept") <- attrInt
     attr(rval, "interceptLabel") <- intLabel
     attr(rval, "deps") <- deps

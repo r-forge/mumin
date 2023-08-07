@@ -1,16 +1,26 @@
 MuMIn package news:
 
+Changes in version 1.47.8 (2023-07-07)
+- (added) duplicated method for "model.selection" object.
+- (added) replacement version of `model.sel` that appends new models to an
+  existing "model.selection" object.
+  
+Changes in version 1.47.6 (2023-05-30)
+- (fixed) problem with matching interaction terms, affecting mostly `model.sel`
+  (spotted by Francis van Oordt).
+- removed backward compatibility with pre-0.15.0 "averaging" objects.
 
 Changes in version 1.47.5 (2023-03-15)
 - r.squaredGLMM: added support for additional families using 
-  insight::get_variance. This requires the addition of 'insight' to the package 
-  dependencies, something done very reluctantly as, as a principle with MuMIn, 
-  new dependencies are only added as a last resort.
-- null.fit and hence r.squaredLR now work also with "survreg" class (reported by
-  Caroline Zanchi).
+  `insight::get_variance`. This requires the addition of 'insight' to the package 
+  dependencies, something done very reluctantly, because, as a principle in 
+  MuMIn, new dependencies are only added as a very last resort.
+  
+- `null.fit` and hence `r.squaredLR` now work also with "survreg" class 
+  (reported by Caroline Zanchi).
 
 Changes in version 1.47.4 (2023-03-13)
-- (fixed) removed remaining references to stats:::format.perc
+- (fixed) removed remaining references to `stats:::format.perc`
 
 Changes in version 1.47.3 (2023-02-27)
 - (fixed) model.avg.default: duplicated interaction coefficients were returned
@@ -19,7 +29,7 @@ Changes in version 1.47.3 (2023-02-27)
 
 Changes in version 1.47.2 (2023-01-06)
 - Updated methods for models of class 'Sarlm' and 'Spautolm' from the 
-  package 'spatialreg' (reported by Iwona Dembicz)
+  package 'spatialreg' (reported by Iwona Dembicz).
 
 Changes in version 1.47.1 (2022-08-31)
 - Pleasing RCheck: updated NEWS file so that it can be parsed by the 

@@ -19,7 +19,8 @@ expression({
 
 
 dredge <-
-function(global.model, beta = c("none", "sd", "partial.sd"), evaluate = TRUE, rank = "AICc",
+function(global.model, beta = c("none", "sd", "partial.sd"), 
+         evaluate = TRUE, rank = "AICc",
 		 fixed = NULL, m.lim = NULL, m.min, m.max, subset,
 		 trace = FALSE, varying, extra, ct.args = NULL,
 		 deps = attr(allTerms0, "deps"),
@@ -61,7 +62,7 @@ function(global.model, beta = c("none", "sd", "partial.sd"), evaluate = TRUE, ra
 		isDotted <- grep("^\\.\\.", sapply(as.list(gmCall), asChar))
 		if(length(isDotted) != 0L) {
 			if(is.name(substitute(global.model))) {
-				cry(, "call stored in 'global.model' contains dotted names and cannot be updated. \n    Consider using 'updateable' on the modelling function")
+				cry(, "the call stored in 'global.model' contains dotted names and cannot be updated. \n    Consider using 'updateable' on the modelling function")
 			} else gmCall[isDotted] <-
 				substitute(global.model)[names(gmCall[isDotted])]
 		}
@@ -140,7 +141,7 @@ function(global.model, beta = c("none", "sd", "partial.sd"), evaluate = TRUE, ra
 	# TODO: other classes: model, fixed, etc...
     gmCoefNames <- names(coeffs(global.model))
     if(any(dup <- duplicated(gmCoefNames)))
-        cry(, "model cannot have duplicated coefficient names: ",
+        cry(, "model cannot have duplicate coefficient names: ",
              prettyEnumStr(gmCoefNames[dup]))
 
 	gmCoefNames <- fixCoefNames(gmCoefNames)
@@ -152,7 +153,7 @@ function(global.model, beta = c("none", "sd", "partial.sd"), evaluate = TRUE, ra
 
 	if ((betaMode != 0L) && is.null(tryCatch(std.coef(global.model, betaMode == 2L),
 		error = return_null, warning = return_null))) {
-		cry(, "do not know how to standardize coefficients of '%s', argument 'beta' ignored",
+		cry(, "do not know how to standardize coefficients of '%s': argument 'beta' ignored",
 			 class(global.model)[1L], warn = TRUE)
 		betaMode <- 0L
 		strbeta <- "none"
@@ -211,7 +212,7 @@ function(global.model, beta = c("none", "sd", "partial.sd"), evaluate = TRUE, ra
 	gmFormulaEnv <- environment(as.formula(formula(global.model), env = gmEnv))
 	# TODO: gmEnv <- gmFormulaEnv ???
 
-	### BEGIN Manage 'varying'
+	### BEGIN 'varying'
 	## @param:	varying
 	## @value:	varying, varyingNames, variants, nVariants, nVarying
 	if(!missing(varying) && !is.null(varying)) {
@@ -233,7 +234,7 @@ function(global.model, beta = c("none", "sd", "partial.sd"), evaluate = TRUE, ra
 	}
 	## END: varying
 
-	## BEGIN Manage 'extra'
+	## BEGIN 'extra'
 	## @param:	extra, global.model, gmFormulaEnv,
 	## @value:	extra, nExtra, extraNames, nullfit_
 	if(!missing(extra) && length(extra) != 0L) {
@@ -261,7 +262,7 @@ function(global.model, beta = c("none", "sd", "partial.sd"), evaluate = TRUE, ra
 		nExtra <- 0L
 		extraNames <- character(0L)
 	}
-	## END: manage 'extra'
+	## END: 'extra'
 
 	nov <- as.integer(nVars - nFixed)
 	ncomb <- (2L ^ nov) * nVariants
@@ -276,16 +277,19 @@ function(global.model, beta = c("none", "sd", "partial.sd"), evaluate = TRUE, ra
 		coefTables <- vector(resultChunkSize, mode = "list")
 	}
 
-	## BEGIN: Manage 'subset'
+	## BEGIN: 'subset'
 	## @param:	hasSubset, subset, allTerms, [interceptLabel],
 	## @value:	hasSubset, subset
 	if(missing(subset))  {
 		hasSubset <- 1L
 	} else {
-		if(!tryCatch(is.language(subset) || is.matrix(subset), error = function(e) FALSE))
+		if(!tryCatch(is.language(subset) || is.matrix(subset) || 
+           is.null(subset) || isTRUE(subset), error = function(e) FALSE))
 			subset <- substitute(subset)
-
-		if(is.matrix(subset)) {
+            
+        if(is.null(subset) || isTRUE(subset)) {
+            hasSubset <- 1L
+        } else if(is.matrix(subset)) {
 			dn <- dimnames(subset)
 			#at <- allTerms[!(allTerms %in% interceptLabel)]
 			n <- length(allTerms)
@@ -320,7 +324,7 @@ function(global.model, beta = c("none", "sd", "partial.sd"), evaluate = TRUE, ra
 			mode(subset) <- "logical"
 			hasSubset <- 2L # subset as matrix
 
-		} else {
+		} else { # subset is not null, TRUE or a matrix
 			if(inherits(subset, "formula")) {
 				if (subset[[1L]] != "~" || length(subset) != 2L)
 					stop("'subset' formula should be one-sided")
@@ -385,7 +389,7 @@ function(global.model, beta = c("none", "sd", "partial.sd"), evaluate = TRUE, ra
 				3L # subset as expression using 'varying' variables
 
 		}
-	} # END: manage 'subset'
+	} # END: 'subset'
 
 	comb.sfx <- rep(TRUE, nFixed)
 	comb.seq <- if(nov != 0L) seq_len(nov) else 0L
