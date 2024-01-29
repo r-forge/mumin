@@ -1,9 +1,13 @@
 Package: MuMIn
 Type: Package
 Title: Multi-Model Inference
-Version: 1.47.8
-Date: 2023-06-30
+Version: 1.47.9
+Date: 2024-01-29
 Encoding: UTF-8
+Authors@R: c(
+  person("Bartoń", "Kamil", role="aut", email="kamil.barton@go2.pl",
+         comment = c(ORCID = "0000-0001-5562-8274"))
+  )
 Author: Kamil Bartoń
 Maintainer: Kamil Bartoń <kamil.barton@go2.pl>
 Description: Tools for performing model selection and model averaging. Automated

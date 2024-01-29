@@ -17,7 +17,7 @@ Data frame columns:
 \item{model terms}{For numeric covariates these columns hold coefficent value,
     for factors their presence in the model. If the term is not present in a 
     model, value is \code{NA}. }
-\item{\sQuote{varying} arguments}{optional. If any arguments differ between the 
+\item{varying arguments}{optional. If any arguments differ between the 
     modelling function calls (except for formulas and some other arguments), 
     these will be held in additional columns (of class \code{"factor"}).}
 \item{"df"}{Number of model parameters}

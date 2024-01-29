@@ -1,5 +1,11 @@
 MuMIn package news:
 
+Changes in version 1.47.9 (2024-01-29)
+- (fixed) `r.squaredGLMM` now returns correct values for non-Bernoulli binomial 
+  models with response as proportion and weights specifying the number of 
+  trials. So the result is now the same as for a model with response as a 
+  2-column matrix (thanks to Emma Neigel for reporting this).
+
 Changes in version 1.47.8 (2023-07-07)
 - (added) duplicated method for "model.selection" object.
 - (added) replacement version of `model.sel` that appends new models to an
@@ -115,6 +121,9 @@ Changes in version 1.43.17 (2020-04-14)
 Changes in version 1.43.16 (2020-03-12)
 - (added) specs for 'unmarkedFitPCount' with mixture = "ZIP" (spotted by Hannah 
   Clyde)
+- (fixed) r.squaredGLMM for binomial family models with N > 1 trials. The 
+  fixed effects variance now accounts for trial number (thanks to Daniel 
+  Schlaepfer)
 
 Changes in version 1.43.15 (2019-12-19)
 - (fixed) fatal error with QIC.geem introduced in the previous version
