@@ -5,7 +5,7 @@ Version: 1.47.9
 Date: 2024-01-29
 Encoding: UTF-8
 Authors@R: c(
-  person("Bartoń", "Kamil", role=c("aut", "cre"), 
+  person("Kamil", "Bartoń", role=c("aut", "cre"), 
          email="kamil.barton@go2.pl",
          comment = c(ORCID = "0000-0001-5562-8274"))
   )
