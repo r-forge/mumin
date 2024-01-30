@@ -5,8 +5,8 @@
 \alias{print.model.selection}
 \encoding{utf-8}
 
-\newcommand{\Rsq}{\ifelse{latex}{\eqn{R^{2}}{R^2}}{\ifelse{html}{\enc{R²}{R^2}}{R^2}}}
-\newcommand{\bq}{\verb{`}\code{#1}\verb{`}}
+%% \newcommand{\Rsq}{\ifelse{latex}{\eqn{R^{2}}{R^2}}{\ifelse{html}{\enc{R²}{R^2}}{R^2}}}
+%% \newcommand{\bq}{\verb{`}\code{#1}\verb{`}}
 
 \title{Automated model selection}
 \description{

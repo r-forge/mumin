@@ -1,5 +1,4 @@
 \encoding{utf-8}
-\newcommand{\myequation}{\ifelse{latex}{\eqn{#1}{#3}}{\ifelse{html}{\enc{\eqn{#2}}{#3}}{#3}}}
 \name{BGWeights}
 \alias{BGWeights}
 \title{Bates-Granger minimal variance model weights}

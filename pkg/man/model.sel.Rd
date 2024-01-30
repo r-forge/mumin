@@ -3,7 +3,7 @@
 \alias{model.sel}
 \alias{model.sel.default}
 \alias{model.sel.model.selection}
-\alias{model.sel}
+\alias{model.sel<-}
 \encoding{utf-8}
 
 \title{model selection table}
