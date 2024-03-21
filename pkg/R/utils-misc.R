@@ -15,12 +15,15 @@ function(...) {
 }
 
 warnonce <- 
-function(id, ...) {
-	if(!isTRUE(get0(flag <- paste0("warned.", as.character(id)[1L]), .MuMInEnv,
-					ifnotfound = FALSE))) {
-		assign(flag, TRUE, envir = .MuMInEnv)
+function(..., show.instance = 0L) {
+	id <- make.names(deparse1(match.call(expand.dots = FALSE)$...))
+	count <- get0(flag <- paste0("warned.", as.character(id)[1L]), .MuMInEnv,
+					ifnotfound = 0L)
+	if(count <= show.instance)
+		assign(flag, count + 1L, envir = .MuMInEnv)
+	if(count == show.instance) {
 		cl <- match.call()
-		cl$id <- NULL
+		cl$show.instance <- NULL
 		cl[[1L]] <- as.name("warning")
 		eval.parent(cl)
 	}

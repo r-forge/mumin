@@ -59,8 +59,7 @@ function(family, varFE, varRE, varResid, link, pmean, lambda, omega, n) {
 
 `r.squaredGLMM` <-
 function(object, null, ...) {
-    warnonce("rsquaredGLMM",
-	simpleWarning(paste0("'r.squaredGLMM' now calculates a revised statistic. See the help page.")))
+    #warnonce(simpleWarning(paste0("'r.squaredGLMM' now calculates a revised statistic. See the help page.")))
     UseMethod("r.squaredGLMM")
 }
 

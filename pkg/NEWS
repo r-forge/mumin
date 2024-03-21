@@ -1,13 +1,14 @@
 MuMIn package news:
 
-Changes in version 1.47.9 (2024-01-29)
+Changes in version 1.47.10 (2024-03-21)
 - (fixed) `r.squaredGLMM` now returns correct values for non-Bernoulli binomial 
   models with response as proportion and weights specifying the number of 
-  trials. So the result is now the same as for a model with response as a 
+  trials. The result is now identical as for a model with response as a 
   2-column matrix (thanks to Emma Neigel for reporting this).
+- removed `logLik.coxme` as the package "coxme" now provides its own method.
 
 Changes in version 1.47.8 (2023-07-07)
-- (added) duplicated method for "model.selection" object.
+- (added) `duplicated` method for "model.selection" object.
 - (added) replacement version of `model.sel` that appends new models to an
   existing "model.selection" object.
   

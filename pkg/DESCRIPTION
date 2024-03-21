@@ -1,8 +1,8 @@
 Package: MuMIn
 Type: Package
 Title: Multi-Model Inference
-Version: 1.47.9
-Date: 2024-01-29
+Version: 1.47.10
+Date: 2024-03-21
 Encoding: UTF-8
 Authors@R: c(
   person("Kamil", "Bartoń", role=c("aut", "cre"), 
@@ -21,7 +21,7 @@ Depends: R (>= 4.2.0)
 Imports: graphics, methods, Matrix, stats, stats4, nlme, insight
 Suggests: lme4 (>= 1.1.0), mgcv (>= 1.7.5), gamm4, MASS, nnet, 
           survival (>= 3.1.0), geepack
-Enhances: aod, aods3, betareg, caper, coxme, cplm, gee, glmmML, logistf, 
+Enhances: aod, aods3, betareg, caper, coxme (>= 2.2.4), cplm, gee, glmmML, logistf, 
           MCMCglmm, ordinal, pscl, spatialreg, splm, unmarked (>= 0.12.2), 
           geeM (>= 0.7.5), gamlss
 LazyData: yes

@@ -65,7 +65,11 @@ Functions useful inside \code{FUN}: \code{\link{as.name}}, \code{\link{as.call}}
 \examples{
 ### simple usage:
 # print all Y(...) terms in a formula (note that symbol "Y" is omitted):
-exprApply(~ X(1) + Y(2 + Y(4)) + N(Y + Y(3)), "Y", print)
+# Note: if `print` is defined as S4 "standardGeneric", we need to use 
+# 'print.default' rather than 'print', or put the call to 'print' inside a 
+# function, i.e. as `function(x) print(x)`:
+exprApply(~ X(1) + Y(2 + Y(4)) + N(Y + Y(3)), "Y", print.default)
+
 
 # replace X() with log(X, base = n)
 exprApply(expression(A() + B() + C()), c("A", "B", "C"), function(expr, base) {

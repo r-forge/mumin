@@ -108,6 +108,7 @@ function (form) {
 				cry(cl, "fitting model with the observation-level random effect term failed. Add the term manually")
 		})
 		.nullUpdateWarning("the result is correct only if all variables used by the model remain unchanged.")
+		warnonce(simpleMessage("turn off these warnings by setting 'options(\"MuMIn.noUpdateWarning\") to FALSE.", call = NULL), show.instance = 3L)
     }
     object
 }
