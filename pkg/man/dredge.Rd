@@ -86,8 +86,10 @@ dredge(global.model, beta = c("none", "sd", "partial.sd"), evaluate = TRUE,
 
   \item{x}{ a \code{model.selection} object, returned by \code{dredge}. }
 
-  \item{abbrev.names}{ should printed term names be abbreviated?
-	(useful with complex models). }
+  \item{abbrev.names}{ Should term names in the table header be abbreviated when
+    printed? This is the default. If full names are required, use \code{print()} 
+    explicitly with this argument set to \code{FALSE}.
+       }
 
   \item{warnings}{ if \code{TRUE}, errors and warnings issued during the model
 	fitting are printed below the table (only with \code{pdredge}).
@@ -288,8 +290,8 @@ There are \code{\link[=subset.model.selection]{subset}} and
 \code{\link[=plot.model.selection]{plot}} methods, the latter creates a
 graphical representation of model weights and per-model term sum of weights.
 Coefficients can be extracted with \code{coef} or \code{\link{coefTable}}.
-}
 
+}
 }
 
 
@@ -316,15 +318,12 @@ of interest and its scientific setting} (Burnham and Anderson, 2002).
 
 \seealso{
 
-\code{\link{pdredge}} is a parallelized version of this function (uses a
-cluster).
-
 \code{\link{get.models}}, \code{\link{model.avg}}. \code{\link{model.sel}} for
 manual model selection tables.
 
-Possible alternatives: \code{\link[glmulti]{glmulti}} in package \pkg{glmulti}
-and \code{\link[bestglm]{bestglm}} (\pkg{bestglm}).
-\code{\link[leaps]{regsubsets}} in package \pkg{leaps} also performs all-subsets
+Possible alternatives: \code{glmulti} in package \pkg{glmulti}
+and \code{bestglm} (\pkg{bestglm}).
+\code{regsubsets} in package \pkg{leaps} also performs all-subsets
 regression.
 
 Variable selection through regularization provided by various packages, e.g. \pkg{glmnet},

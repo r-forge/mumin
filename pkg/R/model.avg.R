@@ -154,7 +154,6 @@ function(object, ..., beta = c("none", "sd", "partial.sd"),
 
 	allmodelnames <- .modelNames(allTerms = allterms1, uqTerms = all.terms)
 
-	
 	coefTableCall <- if(betaMode == 2L) 
 		 call("std.coef", as.symbol("m"), partial.sd = TRUE)
 		else call("coefTable", as.symbol("m"))
@@ -163,7 +162,7 @@ function(object, ..., beta = c("none", "sd", "partial.sd"),
 	for(a in names(ct.args))
 		coefTableCall[[a]] <- ct.args[[a]]
 		
-
+ 
     # NOTE: first argument in coefTableCall is "m" and "d" for dispersion
 	coefTables <-
 	    mapply(function(m, d) {
@@ -174,7 +173,6 @@ function(object, ..., beta = c("none", "sd", "partial.sd"),
 			SIMPLIFY = FALSE)
 	
 
-	
 	# check if models are unique:
 	mcoeffs <- lapply(coefTables, "[", , 1L)
 	dup <- unique(sapply(mcoeffs, function(i) which(sapply(mcoeffs, identical, i))))
@@ -246,18 +244,7 @@ function(object, ..., beta = c("none", "sd", "partial.sd"),
 	mmxs <- tryCatch(cbindDataFrameList(lapply(models, model.matrix)),
 					 error = return_null, warning = return_null)
 
-	# Far less efficient:
-	#mmxs <- lapply(models, model.matrix)
-	#mx <- mmxs[[1]];
-	#for (i in mmxs[-1])
-	#	mx <- cbind(mx, i[,!(colnames(i) %in% colnames(mx)), drop=FALSE])
 
-	# residuals averaged (with brute force)
-	#rsd <- tryCatch(apply(vapply(models, residuals, residuals(object)), 1L,
-		#weighted.mean, w = weight), error = return_null)
-	#rsd <- NULL
-	## XXX: how to calc residuals ?
-	
 	modelClasses <- lapply(models, class)
 	frm <-
 	if(all(vapply(modelClasses[-1L], identical, FALSE, modelClasses[[1L]]))) {

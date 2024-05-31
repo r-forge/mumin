@@ -89,8 +89,8 @@ object.
 \code{\link{dredge}}, \code{\link{AICc}}, \link[=MuMIn-models]{list of supported
 models}.
 
-Possible alternatives: \code{\link[bbmle]{ICtab}} (in package \pkg{bbmle}), or
- \code{\link[AICcmodavg]{aictab}} (\pkg{AICcmodavg}).
+Possible alternatives: \code{ICtab} (in package \pkg{bbmle}), or
+ \code{aictab} (\pkg{AICcmodavg}).
  
 }
 

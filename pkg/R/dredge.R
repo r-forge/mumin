@@ -75,7 +75,7 @@ function(global.model, beta = c("none", "sd", "partial.sd"),
 	
 	thisCall <- sys.call()
 	exprApply(gmCall[["data"]], NA, function(expr) {
-		if(is.symbol(expr[[1L]]) && all(expr[[1L]] != c("@", "$")))
+		if(!is.symbol(expr[[1L]]) || all(expr[[1L]] != c("@", "$", "::")))
 			cry(thisCall, "'global.model' uses \"data\" that is a function value: use a variable instead")
 	})
 
@@ -240,7 +240,7 @@ function(global.model, beta = c("none", "sd", "partial.sd"),
 	if(!missing(extra) && length(extra) != 0L) {
 		
 		if (any(c("adjR^2", "R^2") %in% extra) && nVariants > 1L)
-			stop("\"R^2\" in 'extra' can be used only with no 'varying'")
+			stop("\"R^2\" in 'extra' cannot be used when 'varying' is given")
 		
 		# a cumbersome way of evaluating a non-exported function in a parent frame:
 		extra <- eval(as.call(list(call("get", ".get.extras",
@@ -516,7 +516,9 @@ function(global.model, beta = c("none", "sd", "partial.sd"),
 
 			ll1 <- logLik(fit1)
 			nobs1 <- nobs(fit1)
-			if(nobs1 != gmNobs) cry(, "number of observations in model #%d [%d] different from that in global model [%d]",
+            
+             
+			if(nobs1 != gmNobs) cry(, "model #%d [%d] is fitted to a different number of observations than the global model [%d]",
 				iComb, nobs1, gmNobs, warn = TRUE)
 
 			row1 <- c(mcoef1[allTerms], extraResult1,

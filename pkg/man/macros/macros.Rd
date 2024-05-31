@@ -5,6 +5,8 @@
 \newcommand{\myequation}{\ifelse{latex}{\eqn{#1}{#3}}{\ifelse{html}{\enc{\eqn{#1}}{#3}}{#3}}}
 
 %% \newcommand{\CRANpkg}{\href{https://cran.r-project.org/package=#1}{\pkg{#1}}} 
+\newcommand{\fckCRANpkg}{\bold{#1}}
+\newcommand{\fckpkg}{\bold{#1}}
 \newcommand{\lxcode}{\code{\link[#2]{#1}}}
 \newcommand{\lcode}{\code{\link{#1}}}
 
