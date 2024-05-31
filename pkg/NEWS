@@ -1,5 +1,9 @@
 MuMIn package news:
 
+Changes in version 1.47.12 (2024-05-31)
+- documentation: removed some links to other packages that made CRAN's R Check
+  complaining.
+
 Changes in version 1.47.10 (2024-03-21)
 - (fixed) `r.squaredGLMM` now returns correct values for non-Bernoulli binomial 
   models with response as proportion and weights specifying the number of 
