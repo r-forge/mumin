@@ -1,8 +1,14 @@
 MuMIn package news:
 
-Changes in version 1.47.12 (2024-05-31)
-- documentation: removed some links to other packages that made CRAN's R Check
-  complaining.
+Changes in version 1.48.2 (2024-06-07)
+- support for "unmarkedFit" has been reworked, with more models included 
+  (all except the ones not using formulas as arguments: "occuMS" and 
+  "occuMulti"), and random effects and offset terms recognized 
+  (the latter reported by Jonathan Dinkins).
+
+Changes in version 1.47.12 (2024-06-02)
+- removed links to archived packages in the manual and included some new
+  suggested packages to satisfy R Check.
 
 Changes in version 1.47.10 (2024-03-21)
 - (fixed) `r.squaredGLMM` now returns correct values for non-Bernoulli binomial 
@@ -24,14 +30,14 @@ Changes in version 1.47.6 (2023-05-30)
 Changes in version 1.47.5 (2023-03-15)
 - r.squaredGLMM: added support for additional families using 
   `insight::get_variance`. This requires the addition of 'insight' to the package 
-  dependencies, something done very reluctantly, because, as a principle in 
-  MuMIn, new dependencies are only added as a very last resort.
+  dependencies, albeit very reluctantly, as in principle new dependencies are
+  only added as a very last resort.
   
 - `null.fit` and hence `r.squaredLR` now work also with "survreg" class 
   (reported by Caroline Zanchi).
 
 Changes in version 1.47.4 (2023-03-13)
-- (fixed) removed remaining references to `stats:::format.perc`
+- (fixed) removed remaining references to `stats:::format.perc`.
 
 Changes in version 1.47.3 (2023-02-27)
 - (fixed) model.avg.default: duplicated interaction coefficients were returned
