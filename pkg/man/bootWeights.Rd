@@ -22,7 +22,7 @@ Compute model weights using bootstrap.
 }
 \details{
 The models are fitted repeatedly to a resampled data set and ranked
-using AIC-type criterion. The model weights represent the proportion of
+using \AIC-type criterion. The model weights represent the proportion of
 replicates when a model has the lowest IC value.
 }
 \examples{

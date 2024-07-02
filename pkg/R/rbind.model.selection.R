@@ -87,7 +87,7 @@ function (..., deparse.level = 1, make.row.names = TRUE) {
 	class(rval) <- c("model.selection", "data.frame")
 	if(make.row.names) {
 		rn1 <- rep(names(items), sapply(items, nrow))
-		rn1[i] <- paste0(rn1[i <- rn1 != ""], ".")
+		rn1[i] <- paste0(rn1[i <- nzchar(rn1)], ".")
 		rlabs <- paste0(rn1, unlist(lapply(items, rownames)))
 		if(anyDuplicated(rlabs))
 			rlabs <- make.unique(as.character(rlabs), sep = "")

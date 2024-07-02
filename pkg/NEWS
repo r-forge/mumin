@@ -1,9 +1,20 @@
 MuMIn package news:
 
-Changes in version 1.48.2 (2024-06-07)
+Changes in version 1.48.6 (2024-07-02)
+fixed: corrected problem with model specification of 'unmarkedFitPCount'
+
+Changes in version 1.48.5 (2024-06-23)
+Minor manual improvements
+
+Changes in version 1.48.4 (2024-06-21)
+- Fixed DESCRIPTION issues causing R check problems.
+- Registered previously omitted methods and supplemented package references in 
+  the documentation.
+  
+Changes in version 1.48.2 (2024-06-08)
 - support for "unmarkedFit" has been reworked, with more models included 
-  (all except the ones not using formulas as arguments: "occuMS" and 
-  "occuMulti"), and random effects and offset terms recognized 
+  (all except the ones not using formulas as arguments, i.e. "occuMS" and 
+  "occuMulti"), and random effects and offset terms now being recognized 
   (the latter reported by Jonathan Dinkins).
 
 Changes in version 1.47.12 (2024-06-02)

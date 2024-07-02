@@ -133,9 +133,10 @@ function(global.model, beta = c("none", "sd", "partial.sd"),
 	if(!(gmNaAction <- .checkNaAction(cl = gmCall, what = "'global.model'", envir = gmEnv)))
 		cry(, attr(gmNaAction, "message"))
 
-	if(names(gmCall)[2L] == "") gmCall <-
-		match.call(gmCall, definition = eval(gmCall[[1L]], envir = gmEnv),
-				   expand.dots = TRUE)
+	if(!nzchar(names(gmCall)[2L]))
+		gmCall <-
+			match.call(gmCall, definition = eval(gmCall[[1L]], envir = gmEnv),
+				expand.dots = TRUE)
 
 
 	# TODO: other classes: model, fixed, etc...

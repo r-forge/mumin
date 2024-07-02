@@ -35,7 +35,7 @@ The suite of functions includes:
 
 For a complete list of functions, use \code{library(help = "MuMIn")}.
 
-By default, AIC\eqn{_{c}}{c} is used to rank models and obtain model
+By default, \AICc is used to rank models and obtain model
 weights, although any information criterion can be used. At least the 
 following are currently implemented in \R:
 \code{\link{AIC}} and \code{\link{BIC}} in package \pkg{stats}, and
@@ -44,7 +44,7 @@ following are currently implemented in \R:
 \code{\link{DIC}} extractor for \acronym{MCMC} models and a \code{\link{QIC}} for
 \acronym{GEE}.
 
-Many common modelling functions in \R are supported. For a complete list,
+Many model fitting functions in \R are supported. For a complete list,
 see \link[=MuMIn-models]{the list of supported models}.
 
 In addition to \dQuote{regular} information criteria, model averaging can be 
@@ -70,7 +70,7 @@ Springer-Verlag.
 
 \seealso{
 \code{\link{AIC}}, \code{\link{step}} or \code{\link[MASS]{stepAIC}} for stepwise
-model selection by AIC.
+model selection by \AIC.
 }
 
 \examples{

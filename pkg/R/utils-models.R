@@ -66,7 +66,6 @@ function (x, m) {
 	rval
 }
 
-
 # sorts alphabetically interaction components in model term names
 # if 'peel', tries to remove coefficients wrapped into function-like syntax
 # (this is meant mainly for 'unmarkedFit' models with names such as "psi(a:b:c)")
@@ -96,7 +95,7 @@ function(x, peel = TRUE) {
                 # and of length >= 2
 				m <- regexpr("^(([a-zA-Z]{2,5})\\(((?:[^()]*|(?1))*)\\))$", ixi, perl = TRUE, useBytes = TRUE)
                 cptgrps <- .matches(ixi, m)
-				if(peel <- all(cptgrps[, 2L] != "")) {
+				if(peel <- all(nzchar(cptgrps[, 2L]))) {
 					peelpfx <- paste0(cptgrps[, 2L], "(")
 					peelsfx <- ")"
 					ixi <- cptgrps[, 3L]
@@ -160,7 +159,7 @@ function(x, split = ":",
 		for(i in seq.int(n[k])) {
 			chprv <- ch
 			ch <- substr(x[k], i, i)
-			if(inquote != "") { # in quotes
+			if(nzchar(inquote)) { # in quotes
 				if(chprv == esc && ch == esc) ch <- " " else
 					if(chprv != esc && ch == inquote)	inquote <- ""
 			} else {
@@ -202,7 +201,6 @@ function(models, error = TRUE) {
 		res <- FALSE
 	}
 
-	#datas <- lapply(models, function(x) get_call(x)$data)
 	# XXX: need to compare deparse'd 'datas' due to ..1 bug(?) in which dotted
 	#  arguments (..1 etc) passed by lapply are not "identical"
 	datas <- vapply(lapply(models, function(x) get_call(x)$data), asChar, "")

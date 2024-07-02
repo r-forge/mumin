@@ -3,6 +3,7 @@
 \alias{updateable2}
 \alias{get_call}
 \alias{uGamm}
+\alias{fitdistr2}
 \alias{MuMIn-gamm}
 \alias{gamm-wrapper}
 \encoding{utf-8}
@@ -20,6 +21,10 @@ get_call(x)
 
 ## updateable wrapper for mgcv::gamm and gamm4::gamm4
 uGamm(formula, random = NULL, ..., lme4 = inherits(random, "formula"))
+
+## updateable wrapper for MASS::fitdistr
+fitdistr2(x, densfun, start, ...)
+
 }
 
 \arguments{
@@ -30,10 +35,15 @@ uGamm(formula, random = NULL, ..., lme4 = inherits(random, "formula"))
 	\item{Class}{optional character vector naming class(es) to be set onto the
 		result of \code{FUN} (not possible with formal S4 objects). }
 	
-	\item{x}{an object from which the call should be extracted. }
+	\item{x}{for \code{updateable}, an object from which the call should be 
+        extracted. For \code{fitdistr2}, a numeric vector passed to 
+        \code{\link[MASS]{fitdistr}}. }
 	
 	\item{formula, random, \dots}{arguments to be passed to \code{gamm} or \code{gamm4}}
 	\item{lme4}{if \code{TRUE}, \code{gamm4} is called, \code{gamm} otherwise. }
+    
+    \item{densfun, start, \dots}{Arguments passed to \code{\link[MASS]{fitdistr}}. }
+    
 }
 
 \details{
@@ -49,15 +59,15 @@ uGamm(formula, random = NULL, ..., lme4 = inherits(random, "formula"))
 	\code{updateable} can also be used to repair an existing \code{call} element,
 	e.g. if it contains \link[=dots]{dotted names} that prevent re-evaluation
 	of such a call.
-	
-	Argument \code{eval.args} specifies names of function arguments that should
-	be evaluated in the stored call. This is useful when, for example, the model
-	object does not have \code{formula} element. The default \code{formula} 
-	method tries to retrieve formula from the stored \code{call},
-	which works unless the formula has been given as a variable and value of
-	that variable changed since the model was fitted (the last \sQuote{example}
-	demonstrates this).
-	
+    
+    The \code{eval.args} argument specifies the names of the function arguments 
+    that should be evaluated in the stored call. This is useful when, for 
+    example, the model object does not have a \code{formula} element or does not 
+    store the formula in any other way, and the formula has been specified as a
+    variable name. In such a case, the default \code{formula} method attempts 
+    to retrieve the formula from the stored \code{call}, which does not 
+    guarantee that the value of this variable will be the same as the one used 
+    for fitting the model (this is demonstrates in the last \Quote{example}).
 	
 }
 

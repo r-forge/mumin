@@ -189,9 +189,7 @@ function(obj, termNames, opt, ...) {
 	} else {
 		ret <- list(model.parameters = mpar)
 	}
-	
 	#attr(ret, "formulaList") <- formulaList
-
 	ret
 }
 

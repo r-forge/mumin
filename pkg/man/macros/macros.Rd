@@ -13,5 +13,17 @@
 \newcommand{\logLik}{\myequation{\log\mathcal{L}(#1)}{XXXX}{logL(#1)}}
 \newcommand{\Rsq}{\myequation{R^{2}}{XXXX}{R^2}}
 \newcommand{\Rsq}{\myequation{R^{2}}{XXXX}{R^2}}
-%% \newcommand{\Rsq}{\ifelse{latex}{\eqn{R^{2}}{R^2}}{\ifelse{html}{\enc{R²}{R^2}}{R^2}}}
 \newcommand{\Rsqx}{\myequation{R_{#1}^{2}}{XXXX}{R_#1^2}}
+
+
+\newcommand{\AICc}{\acronym{AIC\eqn{_{c}}{c}}}
+\newcommand{\QAICc}{\acronym{QAIC\eqn{_{c}}{c}}}
+\newcommand{\QICu}{\acronym{QIC\eqn{_{u}}{u}}}
+\newcommand{\AIC}{\acronym{AIC}}
+\newcommand{\QIC}{\acronym{QIC}}
+\newcommand{\QAIC}{\acronym{QAIC}}
+\newcommand{\BIC}{\acronym{BIC}}
+\newcommand{\IC}{\acronym{IC}}
+
+\newcommand{\DeltaIC}{\myequation{\Delta_{#1}}{}{Delta_#1}}
+

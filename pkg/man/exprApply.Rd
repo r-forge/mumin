@@ -54,8 +54,7 @@ does remove source reference from any \code{function} expression inside
 Expression-related functions: \code{\link{substitute}}, 
 \code{\link{expression}}, \code{\link{quote}} and \code{\link{bquote}}.
 
-Similar function \code{\link[=codetools]{walkCode}} exists in package 
-\pkg{codetools}. 
+Similar function \code{walkCode} exists in package \pkg{codetools}. 
 
 Functions useful inside \code{FUN}: \code{\link{as.name}}, \code{\link{as.call}},
 \code{\link{call}}, \code{\link{match.call}} etc.

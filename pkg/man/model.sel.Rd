@@ -31,8 +31,9 @@ model.sel(x) <- value
     \item{\dots}{more fitted model objects. }
 	
     \item{rank}{optional, custom rank function (returning an information 
-		criterion) to use instead of the default \code{AICc}, e.g. \code{QAIC} or \code{BIC}, may be omitted
-        if \code{object} is a model list returned by \code{get.models}. }
+		criterion) to use instead of the default \code{AICc}, e.g. \code{QAIC} 
+        or \code{BIC}, may be omitted if \code{object} is a model list 
+        returned by \code{get.models}. }
 
     \item{rank.args}{optional \code{list} of arguments for the \code{rank}
         function. If one is an expression, an \code{x} within it is substituted
@@ -59,8 +60,7 @@ model.sel(x) <- value
 An object of class \code{c("model.selection", "data.frame")}, being a 
 \code{data.frame}, where each row represents one model and columns contain 
 useful information about each model: the coefficients, \emph{df}, log-likelihood, the
-value of the information criterion used,  
- \ifelse{latex}{\eqn{\Delta_{IC}}}{\enc{Δ}{Delta}_IC} and \sQuote{Akaike 
+value of the information criterion used, \DeltaIC{IC} and \sQuote{Akaike 
  weight}.
   If any arguments differ between the modelling function calls, the 
  result will include additional columns showing them (except for formulas and 

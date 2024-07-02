@@ -23,8 +23,10 @@ Data frame columns:
 \item{df}{Number of model parameters}
 \item{logLik}{Log-likelihood (or quasi-likelihood for \acronym{GEE})}
 \item{<rank>}{Information criterion value}
-\item{delta}{\ifelse{latex}{\eqn{\Delta_{IC}}}{\enc{Δ}{Delta}_IC}}
-\item{weight}{\sQuote{Akaike weights}.}
+\item{delta}{the \IC difference, i.e. the the relative difference to 
+    the best model, 
+    \ifelse{latex}{\eqn{\Delta_{IC} = IC_i - IC_{min}}}{\enc{Δ}{Delta}_IC = IC_i - IC_min}, }
+\item{weight}{\sQuote{Akaike weights}, i.e. \link[=Weights]{normalized model likelihoods}.}
 
 Attributes:
     \item{model.calls}{A list containing model calls (arranged in 

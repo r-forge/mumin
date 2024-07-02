@@ -84,7 +84,7 @@ function (object, parm, level = 0.95, full = FALSE, ...) {
     ci <- t(sapply(parm, function(i)
 		par.avg(cf[,i], se[,i], wts, dfs[, i], alpha = a2)))[, 4L:5L, drop = FALSE]
 	ci[is.na(object$coefficients[1L, parm]), ] <- NA_real_
-    colnames(ci) <- format.perc(c(a, 1L - a), 3L)
+    colnames(ci) <- format_perc(c(a, 1L - a), 3L)
     return(ci)
 }
 
@@ -164,7 +164,7 @@ function(x, ...) {
         "\n\n", sep = "")
     cat("Component models:", "\n")
 	comp.names <- rownames(x$msTable)
-	comp.names[comp.names == ""] <- "null"
+	comp.names[!nzchar(comp.names)] <- "null"
 	cat(format(sQuote(comp.names), justify = "l"), fill = TRUE)
 	cat("\nCoefficients:", "\n")
 	print(x$coefficients[!is.na(x$coefficients[,1L]), , drop = FALSE])

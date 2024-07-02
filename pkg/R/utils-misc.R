@@ -82,7 +82,7 @@ function(x) all(vapply(x[-1L], identical, logical(1L), x[[1L]]))
 `.makeListNames` <- function(x) {
 	nm <- names(x)
 	lapply(seq_along(x), function(i) {
-		if(is.null(nm) || nm[i] == "") {
+		if(is.null(nm) || !nzchar(nm[i])) {
 			switch(mode(x[[i]]),
 				call = {
 						v <- asChar(x[[i]], width.cutoff = 20L)
@@ -150,8 +150,8 @@ function(x) all(vapply(x[-1L], identical, logical(1L), x[[1L]]))
 		vnames <- names(vars)
 		if (is.null(vnames)) {
 			names(vars) <- vapply(Call, asChar, "")
-		} else if (any(vnames == "")) {
-			names(vars) <- ifelse(vnames == "", vapply(Call, asChar, ""), vnames)
+		} else if (any(!nzchar(vnames))) {
+			names(vars) <- ifelse(!nzchar(vnames), vapply(Call, asChar, ""), vnames)
 		}
 		get("clusterCall")(cluster, getv, vars)
 		# clusterCall(cluster, getv, vars)
@@ -228,8 +228,8 @@ function(x) all(vapply(x[-1L], identical, logical(1L), x[[1L]]))
 }
 
 
-## from stats:::format.perc
-`format.perc` <-
+## from stats:::format_perc
+`format_perc` <-
 function (probs, digits) 
 paste(format(100 * probs, trim = TRUE, scientific = FALSE, digits = digits), 
     "%")
@@ -257,7 +257,7 @@ function(extra, r2nullfit = FALSE) {
 	extraNames <- sapply(extra, function(x) switch(mode(x),
 		call = asChar(x[[1L]]), name = asChar(x), character = , x))
 	if(!is.null(names(extra)))
-		extraNames <- ifelse(names(extra) != "", names(extra), extraNames)
+		extraNames <- ifelse(nzchar(names(extra)), names(extra), extraNames)
 	extra <- structure(as.list(unique(extra)), names = extraNames)
 	if(any(i <- vapply(extra, is.language, TRUE)))
 		extra[i] <- lapply(extra[i], eval)

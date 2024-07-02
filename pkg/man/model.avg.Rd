@@ -192,7 +192,7 @@ averaging.
 fm1 <- lm(y ~ ., data = Cement, na.action = na.fail)
 (ms1 <- dredge(fm1))
 
-#models with delta.aicc < 4
+# Use models with Delta AICc < 4
 summary(model.avg(ms1, subset = delta < 4))
 
 #or as a 95\% confidence set:

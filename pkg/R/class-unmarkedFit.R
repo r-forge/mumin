@@ -7,7 +7,10 @@ function(fit) {
 		!is.na(.umf_specs$formula.arg)
 	if(!any(i))
 		stop(gettextf("'%s' object is not supported yet", className, domain = "MuMIn"))
-	droplevels(.umf_specs[i, ])
+	specs <- droplevels(.umf_specs[i, ])
+	# XXX:
+
+	specs
 }
 
 `formula.unmarkedFit` <- function (x, ...) x@formula

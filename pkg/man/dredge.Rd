@@ -5,9 +5,6 @@
 \alias{print.model.selection}
 \encoding{utf-8}
 
-%% \newcommand{\Rsq}{\ifelse{latex}{\eqn{R^{2}}{R^2}}{\ifelse{html}{\enc{R²}{R^2}}{R^2}}}
-%% \newcommand{\bq}{\verb{`}\code{#1}\verb{`}}
-
 \title{Automated model selection}
 \description{
 Generate a model selection table of models with combinations (subsets) of fixed 
@@ -261,9 +258,9 @@ Compound model terms (such as interactions, \sQuote{as-is} expressions within
 	}
 }
 
-To simply keep certain terms in all models, use of argument \code{fixed} is much
-more efficient. The \code{fixed} formula is interpreted in the same manner
-as model formula and so the terms must not be quoted.
+To simply keep certain terms in all models, it is much more efficient to use 
+the \code{fixed} argument. The \code{fixed} formula is interpreted in the same
+ manner as model formula, so the terms must not be quoted.
 }
 
 \subsection{Missing values}{
@@ -323,6 +320,7 @@ manual model selection tables.
 
 Possible alternatives: \code{glmulti} in package \pkg{glmulti}
 and \code{bestglm} (\pkg{bestglm}).
+%% \code{\link[leaps]{regsubsets}} in package \pkg{leaps} also performs all-subsets
 \code{regsubsets} in package \pkg{leaps} also performs all-subsets
 regression.
 

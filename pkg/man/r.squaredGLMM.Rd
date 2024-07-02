@@ -104,17 +104,18 @@ al. (2017) paper. The returned value's format also has changed (it is a
 function calculated the \dQuote{theoretical} \Rsqx{GLMM} for \code{binomial}
 models.
 
-\Rsqx{GLMM} can be calculated also for fixed-effect models. In
-the simpliest case of \acronym{OLS} it reduces to \code{var(fitted) /
-(var(fitted) + deviance / 2)}. Unlike likelihood-ratio based \Rsq for 
-\acronym{OLS}, value of this statistic differs from that of
-the classical \Rsq.
+\Rsqx{GLMM} can be calculated also for fixed-effect only models. In
+the simpliest case of \acronym{OLS} it reduces to 
+\myequation{\frac{Var({\hat{\mu}})}{Var({\hat{\mu}}) + D/2}}{}{Var(mu) / (Var(mu) + D(y, mu) / 2)},
+where \myequation{Var({\hat{\mu}})}{}{Var(mu)} is the variance of fitted values, 
+and \var{D} is the model deviance. Unlike likelihood-ratio based \Rsq for 
+\acronym{OLS}, value of this statistic differs from that of the classical \Rsq.
 
 Currently methods exist for classes: \code{merMod}, \code{lme},
 \code{glmmTMB}, \code{glmmADMB}, \code{glmmPQL}, \code{cpglm}(\code{m}) and
 (\code{g})\code{lm}.
 
-For families other than gaussian, Gamma, poisson, binomial and negative binomial,
+For families other than gaussian, Gamma, Poisson, binomial and negative binomial,
 the residual variance is obtained using \code{\link[insight]{get_variance}} 
 from package \CRANpkg{insight}.
 
@@ -124,7 +125,7 @@ model selection.
 }
 
 \author{
-Kamil Barto\enc{ń}{n}. This implementation is based on \R code from 
+Kamil Barto\enc{ń}{n}. This implementation is based on the
 \sQuote{Supporting Information} for Nakagawa et al. (2014), 
 (the extension for random-slopes) Johnson (2014), and includes developments from
 Nakagawa et al. (2017).

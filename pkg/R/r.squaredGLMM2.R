@@ -59,7 +59,6 @@ function(family, varFE, varRE, varResid, link, pmean, lambda, omega, n) {
 
 `r.squaredGLMM` <-
 function(object, null, ...) {
-    #warnonce(simpleWarning(paste0("'r.squaredGLMM' now calculates a revised statistic. See the help page.")))
     UseMethod("r.squaredGLMM")
 }
 
@@ -156,7 +155,6 @@ function(object, null, envir = parent.frame(), pj2014 = FALSE, ...) {
         }
         rval
     }, {
-	    #message("using 'insight::get_variance_residual'")
 		varResid <- insight::get_variance_residual(object, ...)[[1L]]
 		if(!is.finite(varResid))
 			warning("residual variance cannot be calculated.")
@@ -185,7 +183,6 @@ function(object, null, envir = parent.frame(), ...) {
 function(object, null, envir = parent.frame(), ...) {
 	if(object$zeroInflation)
         warning("effects of zero-inflation are ignored")
-		#stop("r.squaredGLMM cannot (yet) handle 'glmmADMB' object with zero-inflation")
 	r.squaredGLMM.merMod(object, null, envir, ...)
 }
 

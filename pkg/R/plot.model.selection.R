@@ -1,5 +1,4 @@
 
-
 `plot.model.selection` <-
 function(x,
 	ylab = NULL, xlab = NULL, main = "Model selection table",

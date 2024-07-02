@@ -152,8 +152,12 @@ function(object, ..., beta = c("none", "sd", "partial.sd"),
 	all.terms <- all.terms[order(vapply(gregexpr(":", all.terms),
 		function(x) if(x[1L] == -1L) 0L else length(x), 1L), all.terms)]
 
+	# allmodelnames <- modelNames(models, asNumeric = FALSE,
+		# withRandomTerms = FALSE, withFamily = FALSE)
 	allmodelnames <- .modelNames(allTerms = allterms1, uqTerms = all.terms)
 
+	#if(is.null(names(models))) names(models) <- allmodelnames
+	
 	coefTableCall <- if(betaMode == 2L) 
 		 call("std.coef", as.symbol("m"), partial.sd = TRUE)
 		else call("coefTable", as.symbol("m"))
@@ -162,7 +166,9 @@ function(object, ..., beta = c("none", "sd", "partial.sd"),
 	for(a in names(ct.args))
 		coefTableCall[[a]] <- ct.args[[a]]
 		
- 
+
+	.DebugPrint(coefTableCall)
+    
     # NOTE: first argument in coefTableCall is "m" and "d" for dispersion
 	coefTables <-
 	    mapply(function(m, d) {
@@ -172,7 +178,15 @@ function(object, ..., beta = c("none", "sd", "partial.sd"),
 	    }, m = models, d = if(is.null(dispersion)) NA else dispersion,
 			SIMPLIFY = FALSE)
 	
-
+    
+	#coefTables <- vector(nModels, mode = "list")
+    # # NOTE: first argument in coefTableCall is "models[[i]]"
+	# for(i in seq_len(nModels)) {
+		# coefTables[[i]] <- eval(coefTableCall)
+		# rownames(coefTables[[i]]) <- fixCoefNames(rownames(coefTables[[i]]))
+	# }
+	
+	
 	# check if models are unique:
 	mcoeffs <- lapply(coefTables, "[", , 1L)
 	dup <- unique(sapply(mcoeffs, function(i) which(sapply(mcoeffs, identical, i))))
@@ -226,7 +240,10 @@ function(object, ..., beta = c("none", "sd", "partial.sd"),
     names(all.terms) <- seq_along(all.terms)
 	colnames(mstab)[3L] <- ICname
 
-
+	# Benchmark: 3.7x faster
+	#system.time(for(i in 1:10000) t(array(unlist(p), dim=c(length(all.terms),length(models)))))
+	#system.time(for(i in 1:10000) do.call("rbind", p))
+	
 	vpresent <- do.call("rbind", lapply(models, function(x)
 		all.terms %in% getAllTerms(x)))
 	
@@ -244,7 +261,18 @@ function(object, ..., beta = c("none", "sd", "partial.sd"),
 	mmxs <- tryCatch(cbindDataFrameList(lapply(models, model.matrix)),
 					 error = return_null, warning = return_null)
 
+	# Far less efficient:
+	#mmxs <- lapply(models, model.matrix)
+	#mx <- mmxs[[1]];
+	#for (i in mmxs[-1])
+	#	mx <- cbind(mx, i[,!(colnames(i) %in% colnames(mx)), drop=FALSE])
 
+	# residuals averaged (with brute force)
+	#rsd <- tryCatch(apply(vapply(models, residuals, residuals(object)), 1L,
+		#weighted.mean, w = weight), error = return_null)
+	#rsd <- NULL
+	## XXX: how to calc residuals ?
+	
 	modelClasses <- lapply(models, class)
 	frm <-
 	if(all(vapply(modelClasses[-1L], identical, FALSE, modelClasses[[1L]]))) {
