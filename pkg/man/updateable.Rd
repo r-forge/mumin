@@ -67,7 +67,7 @@ fitdistr2(x, densfun, start, ...)
     variable name. In such a case, the default \code{formula} method attempts 
     to retrieve the formula from the stored \code{call}, which does not 
     guarantee that the value of this variable will be the same as the one used 
-    for fitting the model (this is demonstrates in the last \Quote{example}).
+    for fitting the model (this is demonstrated in the last \sQuote{example}).
 	
 }
 
