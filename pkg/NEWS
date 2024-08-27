@@ -1,13 +1,17 @@
 MuMIn package news:
 
+Changes in version 1.48.7 (2024-08-25)
+- (added) methods for class 'fitdistr' (MASS package), which can now be used
+  with `model.sel`.
+
 Changes in version 1.48.6 (2024-07-02)
-fixed: corrected problem with model specification of 'unmarkedFitPCount'
+- (fixed) problem with model specification of 'unmarkedFitPCount'
 
 Changes in version 1.48.5 (2024-06-23)
-Minor manual improvements
+- Minor manual improvements
 
 Changes in version 1.48.4 (2024-06-21)
-- Fixed DESCRIPTION issues causing R check problems.
+- (fixed) DESCRIPTION issues causing R check problems.
 - Registered previously omitted methods and supplemented package references in 
   the documentation.
   
@@ -18,7 +22,7 @@ Changes in version 1.48.2 (2024-06-08)
   (the latter reported by Jonathan Dinkins).
 
 Changes in version 1.47.12 (2024-06-02)
-- removed links to archived packages in the manual and included some new
+- (removed) links to archived packages in the manual and included some new
   suggested packages to satisfy R Check.
 
 Changes in version 1.47.10 (2024-03-21)
@@ -26,7 +30,7 @@ Changes in version 1.47.10 (2024-03-21)
   models with response as proportion and weights specifying the number of 
   trials. The result is now identical as for a model with response as a 
   2-column matrix (thanks to Emma Neigel for reporting this).
-- removed `logLik.coxme` as the package "coxme" now provides its own method.
+- (removed) `logLik.coxme` as the package "coxme" now provides its own method.
 
 Changes in version 1.47.8 (2023-07-07)
 - (added) `duplicated` method for "model.selection" object.

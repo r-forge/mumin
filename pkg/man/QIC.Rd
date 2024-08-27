@@ -57,7 +57,7 @@ Methods exist for
 and \code{yags} (\pkg{yags} on R-Forge).
 There is also a \code{QIC} function in packages \pkg{MESS} and \pkg{geepack}, 
 returning some extra information (such as \acronym{CIC} and \acronym{QICc}). 
-\code{yags} and  \code{\link[ape]{compar.gee}} from package \pkg{ape} both
+\code{yags} and \code{compar.gee} from package \pkg{ape} both
 provide \acronym{QIC} values.
 }
 

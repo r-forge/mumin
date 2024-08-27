@@ -33,9 +33,9 @@ fitdistr2(x, densfun, start, ...)
 	      to be evaluated in the stored call. See \sQuote{Details}. }
 	
 	\item{Class}{optional character vector naming class(es) to be set onto the
-		result of \code{FUN} (not possible with formal S4 objects). }
+		result of \code{FUN} (not possible if the result is an S4 object). }
 	
-	\item{x}{for \code{updateable}, an object from which the call should be 
+	\item{x}{for \code{get_call}, an object from which the call should be 
         extracted. For \code{fitdistr2}, a numeric vector passed to 
         \code{\link[MASS]{fitdistr}}. }
 	
@@ -47,35 +47,39 @@ fitdistr2(x, densfun, start, ...)
 }
 
 \details{
+
 	Most model fitting functions in \R return an object that can be updated or
-	re-fitted \emph{via} \code{\link{update}}. This is thanks to the \code{call}
-	stored in the object, which can be used (possibly modified) later on. It is
-	also utilised by \code{dredge} to generate sub-models. Some functions (such
-	as \code{gamm} or \code{MCMCglmm}) do not provide their result with the
-	\code{call} element. To work that around, \code{updateable} can be used on
-	that function to store the call. The resulting \dQuote{wrapper} should be
-	used in exactly the same way as the original function.
-	
-	\code{updateable} can also be used to repair an existing \code{call} element,
+	re-fitted \emph{via} \code{\link{update}}. This is possible thanks to the 
+    function call stored in the object, which can be used (possibly modified)
+    later on. It is also used by \code{dredge} to generate submodels. Some
+    functions (such as \code{mgcv::gamm} or \code{MCMCglmm::MCMCglmm}) do not 
+    provide their result with the \code{call} element. To work around this, 
+    \code{updateable} can be used on such a function to store the call. The 
+    resulting \dQuote{wrapper} should be used in exactly the same way as the 
+    original function.
+    
+    \code{updateable} can also be used to repair an existing \code{call} element,
 	e.g. if it contains \link[=dots]{dotted names} that prevent re-evaluation
-	of such a call.
+	of a call.
     
     The \code{eval.args} argument specifies the names of the function arguments 
-    that should be evaluated in the stored call. This is useful when, for 
-    example, the model object does not have a \code{formula} element or does not 
-    store the formula in any other way, and the formula has been specified as a
-    variable name. In such a case, the default \code{formula} method attempts 
-    to retrieve the formula from the stored \code{call}, which does not 
-    guarantee that the value of this variable will be the same as the one used 
-    for fitting the model (this is demonstrated in the last \sQuote{example}).
-	
+    to be evaluated in the stored call. This is useful if, for example, the 
+    model object does not have a \code{formula} element or does not 
+    store the formula in any other way, and the modelling function has been 
+    called with the formula specified as the variable name. In this case, the 
+    default \code{formula} method will try to retrieve the formula from the 
+    stored \code{call}, which does not guarantee that the variable will be 
+    available at the time of retrieval, or that the value of that variable will
+    be the same as that used to fit the model (this is demonstrated in the 
+    last \sQuote{example}).
+
 }
 
 \value{
    \code{updateable} returns a function with the same arguments as \code{FUN}, 
    wrapping a call to  \code{FUN} and adding an element named \code{call} to its
    result if possible, otherwise an attribute \code{"call"} (if the returned 
-   value is atomic or a formal S4 object).
+   value is atomic or an S4 object).
 }
 
 \note{

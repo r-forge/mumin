@@ -34,7 +34,7 @@ functions include those produced by:
 \item \lxcode{hurdle}{pscl}, \lxcode{zeroinfl}{pscl} (\CRANpkg{pscl});
 \item \lxcode{negbin}{aod}, \lxcode{betabin}{aod} (class \code{"glimML"}), 
 	package \CRANpkg{aod});
-\item \lxcode{aodml}{aods3}, \lxcode{aodql}{aods3} (\CRANpkg{aods3});
+\item \unlxcode{aodml}{aods3}, \unlxcode{aodql}{aods3} (\unCRANpkg{aods3});
 \item \lxcode{betareg}{betareg} (\CRANpkg{betareg});
 \item \lxcode{brglm}{brglm} (\CRANpkg{brglm});
 \item \code{*sarlm} models, \lxcode{spautolm}{spatialreg} (\CRANpkg{spatialreg});
@@ -59,7 +59,7 @@ Generalized Estimation Equation model implementations:
 \lxcode{geeglm}{geepack} from package \CRANpkg{geepack}, 
 \lxcode{gee}{gee} from \CRANpkg{gee}, 
 \lxcode{geem}{geeM} from \CRANpkg{geeM}, 
-\code{wgeesel} from \fckCRANpkg{wgeesel}, 
+\unlxcode{wgeesel}{geeM} from \unCRANpkg{wgeesel}, 
 and \code{yags} from  \href{http://yags.r-forge.r-project.org/}{\pkg{yags}} (on 
 R-Forge) can be used with \code{\link{QIC}} as the selection criterion.
 

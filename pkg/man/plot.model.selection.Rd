@@ -85,8 +85,8 @@ position in \code{par.lab} and \code{par.vlab} : \code{cex}, \code{las} (see \co
 }
 \examples{
 \dontshow{if (require(graphics)) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
-dd <- dredge(lm(formula = y ~ ., data = Cement, na.action = na.fail))
-plot(dd,
+ms <- dredge(lm(formula = y ~ ., data = Cement, na.action = na.fail))
+plot(ms,
     # colours by coefficient value:
     col.mode = "value",
     par.lab = list(las = 2, line = 1.2, cex = 1),
@@ -94,9 +94,9 @@ plot(dd,
     # change labels for the models to Akaike weights:
     vlabels = parse(text = paste("omega ==", round(Weights(dd), 2)))
     )
-plot(dd, col = 2:3, col.mode = 0) # colour recycled by row
-plot(dd, col = cbind(2:3, 4:5), col.mode = 0) # colour recycled by row and column
-plot(dd, col = 2:3, col.mode = 1) # colour gradient by model weight
+plot(ms, col = 2:3, col.mode = 0) # colour recycled by row
+plot(ms, col = cbind(2:3, 4:5), col.mode = 0) # colour recycled by row and column
+plot(ms, col = 2:3, col.mode = 1) # colour gradient by model weight
 \dontshow{\}) # examplesIf}
 }
 \seealso{
