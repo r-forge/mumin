@@ -49,10 +49,10 @@ Consider using negative binomial family with overdispersed count data.
 }
 
 \seealso{
-\code{\link{AICc}}, \code{\link[stats:family]{quasi}} family used for models with
+\lcode{AICc}, \lxcode{quasi}{stats:family} family used for models with
 over-dispersion.
 
-Tests for overdispersion in GLM[M]: \code{\link[performance]{check_overdispersion}}. 
+Tests for overdispersion in GLM[M]: \lxcode{check_overdispersion}{performance}. 
 }
 
 \author{Kamil Barto\enc{ń}{n}}

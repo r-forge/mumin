@@ -27,7 +27,7 @@ r.squaredGLMM(object, null, ...)
   \item{object}{a fitted linear model object. }
   \item{null}{optionally, a null model, including only random effects. See \sQuote{Details}. }
   \item{envir}{optionally, the \code{environment} in which the null model is to be evaluated.
-      Defaults to the current frame. See \code{\link{eval}}. }
+      Defaults to the current frame. See \lcode{eval}. }
   \item{pj2014}{logical, if \code{TRUE} and \code{object} is of \code{poisson} 
   family, the result will include \Rsqx{GLMM} using original formulation of 
   Johnson (2014). This requires fitting \code{object} with an observation-level
@@ -116,10 +116,10 @@ Currently methods exist for classes: \code{merMod}, \code{lme},
 (\code{g})\code{lm}.
 
 For families other than gaussian, Gamma, Poisson, binomial and negative binomial,
-the residual variance is obtained using \code{\link[insight]{get_variance}} 
+the residual variance is obtained using \lxcode{get_variance}{insight} 
 from package \CRANpkg{insight}.
 
-See note in \code{\link{r.squaredLR}} help page for comment on using \Rsq in 
+See note in \lcode{r.squaredLR} help page for comment on using \Rsq in 
 model selection.
 
 }
@@ -147,9 +147,9 @@ linear mixed-effects models revisited and expanded.
 }
 
 \seealso{
-\code{\link{summary.lm}}, \code{\link{r.squaredLR}}
+\lcode{summary.lm}, \lcode{r.squaredLR}
 
-\code{\link[performance]{r2}} from package \CRANpkg{performance} calculates
+\lxcode{r2}{performance} from package \CRANpkg{performance} calculates
 \Rsqx{GLMM} also for variance at different levels, with optional confidence 
 intervals. \CRANpkg{r2glmm} has functions for \Rsq and partial \Rsq.
 

@@ -33,7 +33,7 @@ dredge(global.model, beta = c("none", "sd", "partial.sd"), evaluate = TRUE,
     standardized by \acronym{SD} and Partial \acronym{SD}, respectively. For 
     backwards compatibility, logical value is also accepted, \code{TRUE} is 
     equivalent to \code{"sd"} and \code{FALSE} to \code{"none"}. 
-    See \code{\link{std.coef}}.	}
+    See \lcode{std.coef}.	}
 
 	\item{evaluate}{whether to evaluate and rank the models. If \code{FALSE}, a
 	list of unevaluated \code{call}s is returned. }
@@ -66,9 +66,9 @@ dredge(global.model, beta = c("none", "sd", "partial.sd"), evaluate = TRUE,
 	arguments, and each item provides a list of choices (i.e. \code{list(arg1 =
 	list(choice1, choice2, ...), ...)}). Complex elements in the choice list
 	(such as \code{family} objects) should be either named (uniquely) or quoted
-	(unevaluated, e.g. using \code{\link{alist}}, see \code{\link{quote}}),
+	(unevaluated, e.g. using \lcode{alist}, see \lcode{quote}),
 	otherwise the result may be visually unpleasant. See example in
-	\code{\link{Beetle}}. }
+	\lcode{Beetle}. }
 
 	\item{extra}{ optional additional statistics to be included in the result,
 	provided as functions, function names or a list of such (preferably named
@@ -79,7 +79,7 @@ dredge(global.model, beta = c("none", "sd", "partial.sd"), evaluate = TRUE,
 	statistics. The character strings \code{"R^2"} and \code{"adjR^2"} are
 	treated in a special way and add a likelihood-ratio based \Rsq and
 	modified-\Rsq to the result, respectively (this is more efficient than using
-	\code{\link{r.squaredLR}} directly). }
+	\lcode{r.squaredLR} directly). }
 
   \item{x}{ a \code{model.selection} object, returned by \code{dredge}. }
 
@@ -94,9 +94,9 @@ dredge(global.model, beta = c("none", "sd", "partial.sd"), evaluate = TRUE,
 	\code{"warnings"} to \code{NULL}. }
 
   \item{ct.args}{ optional list of arguments to be passed to
-	\code{\link{coefTable}} (e.g. \code{dispersion} parameter for \code{glm}
+	\lcode{coefTable} (e.g. \code{dispersion} parameter for \code{glm}
 		affecting standard errors used in subsequent
-		\code{\link[=model.avg]{model averaging}}).}
+		\lxcode{model averaging}{=model.avg}).}
         
   \item{deps}{a \dQuote{dependency matrix} as returned by \code{getAllTerms}, 
         attribute \code{"deps"}. Can be used to fine-tune marginality 
@@ -108,7 +108,7 @@ dredge(global.model, beta = c("none", "sd", "partial.sd"), evaluate = TRUE,
 
        With parallel calculation, an extra argument \code{check} is accepted.
        
-       See \code{\link{pdredge}} for details and examples.
+       See \lcode{pdredge} for details and examples.
        }
 
   \item{\dots}{ optional arguments for the \code{rank} function. Any can be
@@ -128,7 +128,7 @@ predictors (\ifelse{latex}{\eqn{2^{N}}}{\ifelse{html}{\eqn{2^{N}}}{2^N}}, less w
 interactions are present, see below).
 
 The fitted model objects are not stored in the result. To get (a subset of)
-the models, use \code{\link{get.models}} on the object returned by \code{dredge}.
+the models, use \lcode{get.models} on the object returned by \code{dredge}.
 Another way to get all the models is to run 
 \code{lapply(dredge(..., evaluate = FALSE), eval)}, 
 which avoids fitting models twice.
@@ -136,7 +136,7 @@ which avoids fitting models twice.
 For a list of model types that can be used as a \code{global.model} see
 \link[=MuMIn-models]{the list of supported models}. Modelling functions that 
 do not store a \code{call} in their result should be evaluated \emph{via} a wrapper function
-created by \code{\link{updateable}}.
+created by \lcode{updateable}.
 
 \subsection{Information criterion}{
 \code{rank} is found by a call to \code{match.fun} and may be specified as a
@@ -283,10 +283,10 @@ sub-models.
 }
 
 \subsection{Methods}{
-There are \code{\link[=subset.model.selection]{subset}} and
-\code{\link[=plot.model.selection]{plot}} methods, the latter creates a
+There are \lxcode{subset}{=subset.model.selection} and
+\lxcode{plot}{=plot.model.selection} methods, the latter creates a
 graphical representation of model weights and per-model term sum of weights.
-Coefficients can be extracted with \code{coef} or \code{\link{coefTable}}.
+Coefficients can be extracted with \code{coef} or \lcode{coefTable}.
 
 }
 }
@@ -295,7 +295,7 @@ Coefficients can be extracted with \code{coef} or \code{\link{coefTable}}.
 \value{
 An object of class \code{c("model.selection", "data.frame")}, being a
 \code{data.frame}, where each row represents one model.
-See \code{\link{model.selection.object}} for its structure.
+See \lcode{model.selection.object} for its structure.
 }
 
 
@@ -315,12 +315,12 @@ of interest and its scientific setting} (Burnham and Anderson, 2002).
 
 \seealso{
 
-\code{\link{get.models}}, \code{\link{model.avg}}. \code{\link{model.sel}} for
+\lcode{get.models}, \lcode{model.avg}. \lcode{model.sel} for
 manual model selection tables.
 
 Possible alternatives: \code{glmulti} in package \pkg{glmulti}
 and \code{bestglm} (\pkg{bestglm}).
-%% \code{\link[leaps]{regsubsets}} in package \pkg{leaps} also performs all-subsets
+%% \lxcode{regsubsets}{leaps} in package \pkg{leaps} also performs all-subsets
 \code{regsubsets} in package \pkg{leaps} also performs all-subsets
 regression.
 

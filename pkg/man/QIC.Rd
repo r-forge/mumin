@@ -50,10 +50,10 @@ Chapman & Hall/CRC
 
 \seealso{
 Methods exist for 
-\code{\link[gee]{gee}} (package \pkg{gee}),
-\code{\link[geepack]{geeglm}} (\pkg{geepack}), 
-\code{\link[geeM]{geem}} (\pkg{geeM}), 
-\code{wgee} (\fckpkg{wgeesel}, the package's \code{QIC.gee} function is used), 
+\lxcode{gee}{gee} (package \pkg{gee}),
+\lxcode{geeglm}{geepack} (\pkg{geepack}), 
+\lxcode{geem}{geeM} (\pkg{geeM}), 
+\code{wgee} (\unCRANpkg{wgeesel}, the package's \code{QIC.gee} function is used), 
 and \code{yags} (\pkg{yags} on R-Forge).
 There is also a \code{QIC} function in packages \pkg{MESS} and \pkg{geepack}, 
 returning some extra information (such as \acronym{CIC} and \acronym{QICc}). 

@@ -60,10 +60,10 @@ model.names(object, ..., labels = NULL, use.letters = FALSE)
     \code{TRUE}, the full model-averaged coefficients are returned, and 
     subset-averaged ones otherwise.
     If \code{adjust.se} is \code{TRUE}, inflated standard errors are returned. 
-    See \sQuote{Details} in \code{\link{par.avg}}.
+    See \sQuote{Details} in \lcode{par.avg}.
     }
  
-  \item{adjustSigma}{ See \code{\link[nlme]{summary.lme}}. }
+  \item{adjustSigma}{ See \lxcode{summary.lme}{nlme}. }
   \item{type}{ for \acronym{GEE} models, the type of covariance estimator to calculate
 		returned standard errors on. Either \code{"naive"} or \code{"robust"}
 		(\sQuote{sandwich}). }
@@ -75,11 +75,11 @@ model.names(object, ..., labels = NULL, use.letters = FALSE)
 	prevents that. }
     
   \item{\dots}{in \code{model.names}, more fitted model objects.
-	In \code{coefTable} arguments that are passed to appropriate \code{\link{vcov}}
+	In \code{coefTable} arguments that are passed to appropriate \lcode{vcov}
 	or \code{summary} method (e.g. \code{dispersion} parameter for \code{glm} may
 	be used here).
 	In \code{get.response}, if \code{data} is given, arguments to be passed to
-	\code{\link{model.frame}}.
+	\lcode{model.frame}.
 	In other functions may be silently ignored.
   }
   
@@ -103,7 +103,7 @@ model.names(object, ..., labels = NULL, use.letters = FALSE)
 \note{
 
 \code{coeffs}'s value is in most cases identical to that returned by
-\code{\link{coef}}, the only difference being it returns fixed effects'
+\lcode{coef}, the only difference being it returns fixed effects'
 coefficients for mixed models, and the value is always a named numeric vector.
 
 Use of \code{tTable} is deprecated in favour of \code{coefTable}.

@@ -46,11 +46,11 @@ model.sel(x) <- value
 	
 	\item{beta}{indicates whether and how the component models' coefficients 
         should be standardized. See the argument's description in 
-        \code{\link{dredge}}. }
+        \lcode{dredge}. }
 	
 	\item{extra}{optional additional statistics to include in the result,
 		provided as functions, function names or a list of such (best if named
-		or quoted). See \code{\link{dredge}} for details. }
+		or quoted). See \lcode{dredge} for details. }
         
     \item{x}{a \code{"model.selection"} object.}
 
@@ -66,7 +66,7 @@ value of the information criterion used, \DeltaIC{IC} and \sQuote{Akaike
  result will include additional columns showing them (except for formulas and 
  some other arguments).
 
-See \code{\link{model.selection.object}} for its structure. 
+See \lcode{model.selection.object} for its structure. 
 }
 
 \details{
@@ -86,7 +86,7 @@ object.
 \author{Kamil Barto\enc{ń}{n}}
 
 \seealso{
-\code{\link{dredge}}, \code{\link{AICc}}, \link[=MuMIn-models]{list of supported
+\lcode{dredge}, \lcode{AICc}, \link[=MuMIn-models]{list of supported
 models}.
 
 Possible alternatives: \code{ICtab} (in package \pkg{bbmle}), or

@@ -52,7 +52,8 @@ functions include those produced by:
 	element of the argument \code{model.parameters}, keeping its other elements
 	intact;
 \item \lxcode{fitdistr}{MASS} mostly useful for model selection with 
-    \code{model.sel}. Use of \code{fitdistr2} wrapper function is recommended.
+    \code{model.sel}. Use of \lxcode{fitdistr2}{=updateable} wrapper 
+    function is recommended.
 }
 
 Generalized Estimation Equation model implementations: 
@@ -60,8 +61,8 @@ Generalized Estimation Equation model implementations:
 \lxcode{gee}{gee} from \CRANpkg{gee}, 
 \lxcode{geem}{geeM} from \CRANpkg{geeM}, 
 \unlxcode{wgeesel}{geeM} from \unCRANpkg{wgeesel}, 
-and \code{yags} from  \href{http://yags.r-forge.r-project.org/}{\pkg{yags}} (on 
-R-Forge) can be used with \code{\link{QIC}} as the selection criterion.
+and \code{yags} from \href{http://yags.r-forge.r-project.org/}{\pkg{yags}} (on 
+R-Forge) can be used with \lcode{QIC} as the selection criterion.
 
 
 Other classes are also likely to be supported, in particular if they inherit
@@ -74,11 +75,11 @@ This applies also to constructing model selection tables with \code{model.sel}.
 \note{
 * In order to use \code{gamm}, \code{gamm4}, \code{spml (> 1.0.0)},
   \code{crunch} or \code{MCMCglmm} with \code{dredge}, an
-  \code{\link{updateable}} wrapper for these functions should be created.
+  \lcode{updateable} wrapper for these functions should be created.
 }
 
 \seealso{
-\code{\link{model.avg}}, \code{\link{model.sel}} and \code{\link{dredge}}.
+\lcode{model.avg}, \lcode{model.sel} and \lcode{dredge}.
 }
 
 \keyword{package}

@@ -49,12 +49,12 @@ in small samples, \emph{Biometrika} \bold{76}, 297–307.
 \author{Kamil Barto\enc{ń}{n}}
 
 \seealso{
-Akaike's An Information Criterion: \code{\link{AIC}}
+Akaike's An Information Criterion: \lcode{AIC}
 
 Some other implementations:
-%% \code{\link[AICcmodavg]{AICc}} in package \pkg{AICcmodavg},
-%% \code{\link[bbmle:BIC-methods]{AICc}} in package \pkg{bbmle},
-%% \code{\link[glmulti:aic]{aicc}} in package \pkg{glmulti}
+%% \lxcode{AICc}{AICcmodavg} in package \pkg{AICcmodavg},
+%% \lxcode{AICc}{bbmle:BIC-methods} in package \pkg{bbmle},
+%% \lxcode{aicc}{glmulti:aic} in package \pkg{glmulti}
 
 \code{AICc} in package \pkg{AICcmodavg},
 \code{AICc} in package \pkg{bbmle},

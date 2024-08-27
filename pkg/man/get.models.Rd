@@ -18,8 +18,8 @@ get.models(object, subset, cluster = NA, ...)
 }
 
 \arguments{
-    \item{object}{ object returned by \code{\link{dredge}}, 
-        \code{\link{model.sel}} or \code{\link{model.avg}}.
+    \item{object}{ object returned by \lcode{dredge}, 
+        \lcode{model.sel} or \lcode{model.avg}.
     }
     \item{subset}{subset of models, an expression evaluated within the model
         selection table (see \sQuote{Details}).}
@@ -32,7 +32,7 @@ get.models(object, subset, cluster = NA, ...)
 }
 
 \value{
-    \code{\link{list}} of fitted model objects.
+    \lcode{list} of fitted model objects.
 }
 
 \details{
@@ -68,9 +68,9 @@ Alternatively, \code{getCall} and \code{eval} can be used to compute a model out
 \author{Kamil Barto\enc{ń}{n}}
 
 \seealso{
-\code{\link{dredge}} and \code{\link{pdredge}}, \code{\link{model.avg}}
+\lcode{dredge} and \lcode{pdredge}, \lcode{model.avg}
 
-\code{\link{makeCluster}} in packages \pkg{parallel} and \pkg{snow}
+\lcode{makeCluster} in packages \pkg{parallel} and \pkg{snow}
 
 }
 

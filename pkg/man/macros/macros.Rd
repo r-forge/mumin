@@ -5,12 +5,12 @@
 \newcommand{\myequation}{\ifelse{latex}{\eqn{#1}{#3}}{\ifelse{html}{\enc{\eqn{#1}}{#3}}{#3}}}
 
 %% \newcommand{\CRANpkg}{\href{https://cran.r-project.org/package=#1}{\pkg{#1}}} 
-\newcommand{\fckpkg}{\bold{#1}}
-\newcommand{\lxcode}{\code{\link[#2]{#1}}}
-\newcommand{\lcode}{\code{\link{#1}}}
+\newcommand{\unCRANpkg}{\pkg{#1}}
 
-\newcommand{\unCRANpkg}{\bold{#1}}
-\newcommand{\unlxcode}{\code{#1}}
+\newcommand{\lxcode}{\code{\link[#2]{#1}}}
+\newcommand{\unlxcode}{\ifelse{FALSE}{\code{\link[#2]{#1}}}{\code{#1}}}
+
+\newcommand{\lcode}{\code{\link{#1}}}
 
 \newcommand{\logLik}{\myequation{\log\mathcal{L}(#1)}{XXXX}{logL(#1)}}
 \newcommand{\Rsq}{\myequation{R^{2}}{XXXX}{R^2}}

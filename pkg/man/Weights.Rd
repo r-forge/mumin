@@ -64,14 +64,14 @@ Assigning new weights changes the model order accordingly, so reassigning
 \author{Kamil Barto\enc{ń}{n}}
 
 \seealso{
-\code{\link{sw}}, \code{\link{weighted.mean}}
+\lcode{sw}, \lcode{weighted.mean}
 
-\code{\link{armWeights}}, 
-\code{\link{bootWeights}}, \code{\link{BGWeights}}, \code{\link{cos2Weights}},
-\code{\link{jackknifeWeights}} and \code{\link{stackingWeights}} can be used to
+\lcode{armWeights}, 
+\lcode{bootWeights}, \lcode{BGWeights}, \lcode{cos2Weights},
+\lcode{jackknifeWeights} and \lcode{stackingWeights} can be used to
 produce various kinds of model weights.
 
-Not to be confused with \code{\link{weights}}, which extracts fitting weights 
+Not to be confused with \lcode{weights}, which extracts fitting weights 
 from model objects.
 }
 

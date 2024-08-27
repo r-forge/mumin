@@ -3,8 +3,8 @@
 \title{Description of Model Selection Objects}
 \description{
   An object of class \code{"model.selection"} holds a table of model 
-  coefficients and ranking statistics. It is produced by \code{\link{dredge}} 
-  or \code{\link{model.sel}}.
+  coefficients and ranking statistics. It is produced by \lcode{dredge} 
+  or \lcode{model.sel}.
 }
 
 \value{
@@ -60,6 +60,6 @@ The object has class \code{c("model.selection", "data.frame")}.
 }
 
 \seealso{
-  \code{\link{dredge}}, \code{\link{model.sel}}.
+  \lcode{dredge}, \lcode{model.sel}.
 }
 \keyword{models}

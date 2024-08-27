@@ -1,7 +1,7 @@
 
 coefTable.fitdistr <-
 function(model, ...) 
-MuMIn:::.makeCoefTable(coef(model), sqrt(diag(model$vcov)))
+.makeCoefTable(coef(model), sqrt(diag(model$vcov)))
 
 family.fitdistr <-
 function (object, ...)

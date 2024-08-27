@@ -16,8 +16,8 @@ armWeights(object, ..., data, weight.by = c("aic", "loglik"), R = 1000)
 
 \arguments{
   \item{object}{for \code{arm.glm}, a fitted \dQuote{global} \code{glm} object.
-    For \code{armWeights}, a fitted \code{\link{glm}} object, or a
-    \code{list} of such, or an \code{\link[=model.avg]{"averaging"}} object. }
+    For \code{armWeights}, a fitted \lcode{glm} object, or a
+    \code{list} of such, or an \lxcode{"averaging"}{=model.avg} object. }
   \item{\dots}{more fitted model objects. }
   \item{R}{number of permutations. }
   \item{weight.by}{indicates whether model weights should be calculated with \AIC
@@ -26,7 +26,7 @@ armWeights(object, ..., data, weight.by = c("aic", "loglik"), R = 1000)
     \code{arm.glm}. }
   \item{data}{a data frame in which to look for variables for use with 
     \link[=predict]{prediction}. If omitted, the fitted linear predictors are used.}
-%% \item{seed}{optionally, the random seed. See \code{\link{set.seed}}.}
+%% \item{seed}{optionally, the random seed. See \lcode{set.seed}.}
 }
 
 \details{
@@ -44,7 +44,7 @@ All-subsets satisfy the marginality constraints.
 
 \value{
 \code{arm.glm} returns an object of class \code{"averaging"} contaning only 
-\dQuote{full} averaged coefficients. See \code{\link{model.avg}} for object 
+\dQuote{full} averaged coefficients. See \lcode{model.avg} for object 
 description.
 
 \code{armWeights} returns a numeric vector of model weights.
@@ -62,18 +62,18 @@ Yang, Y. 2003 Regression with multiple candidate models: selecting or mixing?
 \author{Kamil Barto\enc{ń}{n}}
 
 \seealso{
-\code{\link{model.avg}}, \code{\link{par.avg}}
+\lcode{model.avg}, \lcode{par.avg}
 
-\code{\link{Weights}} for assigning new model weights to an \code{"averaging"}
+\lcode{Weights} for assigning new model weights to an \code{"averaging"}
 object.
 
 Other implementation of ARM algorithm: \code{arms} in (archived) package
 \bold{MMIX}.
 
-Other kinds of model weights: \code{\link{BGWeights}}, 
-  \code{\link{bootWeights}}, 
-  \code{\link{cos2Weights}}, \code{\link{jackknifeWeights}},
-  \code{\link{stackingWeights}}.
+Other kinds of model weights: \lcode{BGWeights}, 
+  \lcode{bootWeights}, 
+  \lcode{cos2Weights}, \lcode{jackknifeWeights},
+  \lcode{stackingWeights}.
 
 }
 

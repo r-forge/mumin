@@ -6,13 +6,13 @@
 bootWeights(object, ..., R, rank = c("AICc", "AIC", "BIC"))
 }
 \arguments{
-\item{object, \dots}{two or more fitted \code{\link{glm}} objects, or a
-\code{list} of such, or an \code{\link[=model.avg]{"averaging"}} object.}
+\item{object, \dots}{two or more fitted \lcode{glm} objects, or a
+\code{list} of such, or an \lxcode{"averaging"}{=model.avg} object.}
 
 \item{R}{the number of replicates.}
 
 \item{rank}{a character string, specifying the information criterion to use
-for model ranking. Defaults to \code{\link{AICc}}.}
+for model ranking. Defaults to \lcode{AICc}.}
 }
 \value{
 A numeric vector of model weights.
@@ -45,7 +45,7 @@ information-theoretic, and tactical approaches for predictive inference.
 \emph{Ecological Monographs} \strong{88}, 485–504.
 }
 \seealso{
-\code{\link{Weights}}, \code{\link{model.avg}}
+\lcode{Weights}, \lcode{model.avg}
 
 Other model weights: 
 \code{\link{BGWeights}()},
