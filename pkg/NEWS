@@ -1,7 +1,9 @@
 MuMIn package news:
 
 Changes in version 1.48.8 (2024-12-03)
-- Small code improvements and documentation changes
+- small code improvements and documentation changes
+(fixed) extra functions for `dredge` now can return a result coercible to a 
+    numeric value (as documented), as not strictly numeric as it was before.
 
 Changes in version 1.48.7 (2024-08-25)
 - (added) methods for class 'fitdistr' (MASS package), which can now be used

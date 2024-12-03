@@ -244,7 +244,7 @@ get(name, envir = asNamespace(pkg), inherits = FALSE)
 
 # used by 'model.sel' and 'dredge' with argument 'extra'
 .get.extras <-
-function(extra, r2nullfit = FALSE) {
+function(extra, r2nullfit = NULL) {
 	extraExpr <- substitute(extra)
 	if(!is.vector(extra)) {
 		extraExpr <- call("alist", extraExpr)
@@ -261,22 +261,44 @@ function(extra, r2nullfit = FALSE) {
 	extra <- structure(as.list(unique(extra)), names = extraNames)
 	if(any(i <- vapply(extra, is.language, TRUE)))
 		extra[i] <- lapply(extra[i], eval)
-
-	if(any(c("adjR^2", "R^2") %in% extra)) {
-		if(r2nullfit) {
-			extra[extra == "R^2"][[1L]] <-
-				function(x) r.squaredLR(x, null =
-					get("nullfit_", parent.frame()))
-			extra[extra == "adjR^2"][[1L]] <-
-				function(x) attr(r.squaredLR(x, null =
-					get("nullfit_", parent.frame())), "adj.r.squared")		
+    pos <- match(c("R^2", "adjR^2"), extra, nomatch = 0L)
+	if(any(pos != 0L)) {
+        nullfit_ <- NULL # to pass R check
+		if(!is.null(r2nullfit)) {
+            r2env <- new.env()
+            assign("nullfit_", r2nullfit, envir = r2env)  
+            if(pos[1L] != 0L) {
+                f <-  function(x) r.squaredLR(x, null = nullfit_)
+                environment(f) <- r2env
+                extra[["R^2"]] <- f
+            }
+            if(pos[2L] != 0L) {
+                f <-  function(x) attr(r.squaredLR(x, null = nullfit_), "adj.r.squared")
+                environment(f) <- r2env
+                extra[["adjR^2"]] <- f
+            }
 		} else {
-			extra[extra == "R^2"][[1L]] <- r.squaredLR
-			extra[extra == "adjR^2"][[1L]] <-
-				function(x) attr(r.squaredLR(x), "adj.r.squared")
+            if(pos[1L] != 0L) extra[["R^2"]] <- function(x) r.squaredLR(x)
+            if(pos[2L] != 0L) extra[["adjR^2"]] <- function(x) attr(r.squaredLR(x), "adj.r.squared")
 		}
 	}
 	sapply(extra, match.fun, simplify = FALSE)
+}
+
+
+.applyExtras <- 
+function(model, extra) {
+    rval <-.mapply(function(f, a, model) tryCatch({
+        z <- f(model)
+        mode(z) <- "numeric"
+        z
+    }, error = function(err) {
+                err$call  <- call(a, quote(submodel))
+                err$message <- sprintf("while evaluating \"extra\" function '%s': '%s'", a, err$message)
+                stop(err)
+            }), list(f = extra, a = names(extra)), MoreArgs = list(model = model))
+    names(rval) <- names(extra)
+    unlist(rval)
 }
 
 ## matrix multiplication with option of calculating the diagonal only

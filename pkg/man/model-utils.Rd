@@ -11,6 +11,7 @@
 \alias{getAllTerms}
 \alias{getAllTerms.terms}
 \alias{get.response}
+\alias{.get.extras}
 
 \encoding{utf-8}
 %% \newcommand{\href}{#2}
@@ -31,6 +32,10 @@ These functions extract or calculate various values from provided fitted model
 
 \code{model.names} generates shorthand (alpha)numeric names for one or several
 	fitted models.
+    
+\code{.get.extras} is used by \code{model.sel} and \code{dredge} to process the
+    \code{"extra"} argument. It is exported and documented for technical 
+    reasons only and is not useful outside that context. 
 
 }
 
@@ -48,6 +53,9 @@ coefTable(model, ...)
 get.response(x, data = NULL, ...)
 
 model.names(object, ..., labels = NULL, use.letters = FALSE)
+
+.get.extras(extra, r2nullfit = NULL)
+
 
 }
 \arguments{
@@ -91,6 +99,8 @@ model.names(object, ..., labels = NULL, use.letters = FALSE)
 
   \item{use.letters}{logical, whether letters should be used instead of numeric
 	codes. }
+    
+  \item{extra,r2nullfit}{list of unary functions; optional null model object.}  
  }
 
 \details{

@@ -91,7 +91,7 @@ function (object, ...) {
 				as.integer(as.factor(vapply(fam, asChar, "")))
 				]
 			names(rval) <- rownames(object)
-            return(rval)
+			return(rval)
 		} else return(family(attr(object, "global")))
 	} else {
 		attr(object, "model.family")

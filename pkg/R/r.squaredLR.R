@@ -136,7 +136,15 @@ function(formula) {
 
 .getLLML <- 
 function(x) {
-    llfun <- getS3method("logLik", class(x))
+    cls <- class(x)
+    llfun <- if(isS4(logLik)) selectMethod("logLik", cls) else logLik
+    if(isS3stdGeneric(llfun))
+        for(cl in cls)
+            if(is.function(llfun <- getS3method("logLik", cl, optional = TRUE)))
+                break
+    if(is.null(llfun))
+        stop("no 'logLik' method found for object of class ",
+            prettyEnumStr(cls, sep.last = ", "))
     arg <- list(object = x, REML = FALSE)
     do.call(llfun, arg[names(arg) %in%  names(formals(llfun))])
 }
