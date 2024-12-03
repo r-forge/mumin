@@ -1,7 +1,7 @@
 MuMIn package news:
 
 Changes in version 1.48.8 (2024-12-03)
-- Small documentation changes
+- Small code improvements and documentation changes
 
 Changes in version 1.48.7 (2024-08-25)
 - (added) methods for class 'fitdistr' (MASS package), which can now be used
