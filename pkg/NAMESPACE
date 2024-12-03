@@ -58,7 +58,7 @@ importFrom("stats", ".checkMFClasses", ".getXlevels", ".MFclass", "AIC",
 
 importFrom("stats4", "logLik", "coef", "vcov")
 
-importFrom("utils", "capture.output")
+importFrom("utils", "capture.output", "getS3method")
 
 importFrom("Matrix", "t", "rowSums", "det", "diag", "solve")
 

@@ -135,8 +135,8 @@ which avoids fitting models twice.
 
 For a list of model types that can be used as a \code{global.model} see
 \link[=MuMIn-models]{the list of supported models}. Modelling functions that 
-do not store a \code{call} in their result should be evaluated \emph{via} a wrapper function
-created by \lcode{updateable}.
+do not store a \code{call} in their result should be run \emph{via} a 
+wrapper function created by \lcode{updateable}.
 
 \subsection{Information criterion}{
 \code{rank} is found by a call to \code{match.fun} and may be specified as a
@@ -148,39 +148,46 @@ always return a scalar.
 }
 
 \subsection{Interactions}{
-By default, marginality constraints are respected, so \dQuote{all possible
-combinations} include only those containing interactions with their
-respective main effects and all lower-order terms.
-However, if \code{global.model} makes an exception to this principle (e.g. due
-to a nested design such as \code{a / (b + d)}), this will be reflected in the
-subset models.
+By default, marginality constraints are respected, so that \dQuote{all possible
+combinations} include only those that contain interactions with their
+respective main effects and all lower order terms, unless the
+\code{global.model} makes an exception to this principle (e.g. due
+to a nested design such as \code{a / b}).
+
 }
 
-
 \subsection{Subsetting}{
-There are three ways to constrain the resulting set of models: setting limits to
-the number of terms in a model with \code{m.lim}, binding 
-term(s) to all models using \code{fixed}, and the \code{subset} argument can be 
-used for more complex rules. For a model to be included in the selection table, its 
-formulation must satisfy all these conditions.
+
+The resulting set of models can be constrained with three methods:
+(1) set limits on
+the number of terms in a model with \code{m.lim}, (2) bind term(s) to all
+models with \code{fixed}, and (3) use \code{subset} for more complex rules.
+To be included in the selection table, the formulation of a model must satisfy 
+all these conditions.
 
 %%Terms in \code{fixed} argument are applied before the combinations are
 %%generated, therefore more efficient than \code{subset}.
 
-\code{subset} may be an \emph{expression} or a \emph{matrix}.
-The latter should be a lower triangular matrix with logical values, where the 
-columns and rows correspond to \code{global.model} terms. Value
-\code{subset["a", "b"] == FALSE} will exclude any model containing both 
-\var{a} and \var{b} terms. \cr
+\code{subset} can be an \emph{expression} or a \emph{matrix}.
+If a matrix, it should be a logical, lower triangular matrix, with 
+rows and columns corresponding to \code{global.model} terms. If this matrix has 
+\code{dimnames}, they must match the term names (as returned by \code{getAllTerms}).
+Unmatched names are silently ignored. Otherwise, if rows or columns are unnamed, 
+they are matched positionally to the model terms, and \code{dim(subset)} must 
+be equal to the number of terms. 
+For example, \code{subset["a", "b"] == FALSE} excludes models 
+with  both \var{a} and \var{b} terms; and if unnamed, \code{subset}, 
+\code{subset[2, 3] == FALSE} will prevent the second and third terms of the 
+global model from being both in the same model. \cr
+
 \code{demo(dredge.subset)} has examples of using the \code{subset} matrix in 
 conjunction with correlation matrices to exclude models containing collinear 
 predictors.
 
-In the form of \code{expression}, the argument \code{subset} acts in a similar
-fashion to that in the function \code{subset} for \code{data.frames}: model
-terms can be referred to by name as variables in the expression, with the
-difference being that are interpreted as logical values (i.e. equal to
-\code{TRUE} if the term exists in the model).
+In the form of an \code{expression}, the argument \code{subset} acts similarly
+to that of \code{subset()} for \code{data.frame}s. Model terms can be referred 
+to by name as variables in the expression, except that they are interpreted as 
+logical values indicating the presence of a term in the model.
 
 The expression can contain any of the \code{global.model} term names, as well as
  names of the \code{varying} list items. \code{global.model} term names take
@@ -189,13 +196,13 @@ precedence when identical to names of \code{varying}, so to avoid ambiguity
 \code{V()} (e.g. \code{V(family) == "Gamma"}) assuming that
 \code{varying} is something like \code{list(family =} \code{c("Gamma", ...))}).
 
-If item names in \code{varying} are missing, the items themselves are coerced to
-names. Call and symbol elements are represented as character values (\emph{via}
-\code{deparse}), and anything other than numeric, logical, character and
-\code{NULL} values is replaced by item numbers (e.g. \code{varying =}
-\code{list(family =} \code{list(gaussian, Gamma)} should be referred to as
-\code{subset = V(family) == 2}. This can quickly become confusing, so it
-is recommended to use named lists. Examples can be found in \code{demo(dredge.varying)}.
+If elements of \code{varying} are unnamed, they are coerced into names. Calls 
+and symbols are represented as character values (via "deparse"), and everything 
+except numeric, logical, character and NULL values is represented by element 
+numbers (e.g. \code{subset = V(family) == 2} points to \code{Gamma} family in 
+\code{varying =}\code{list(family =}\code{list(gaussian, Gamma)}). This can 
+easily become obscure, so using named lists in \code{varying} is recommended.
+Examples can be found in \code{demo(dredge.varying)}.
 
 Term names appearing in \code{fixed} and \code{subset} must be given exactly 
 as they are returned by \code{getAllTerms(global.model)}, which may differ
@@ -213,10 +220,10 @@ an alias for \code{with}.
 
 The special variable \ifelse{latex}{\bq{*nvar*}}{\code{`*nvar*`}} 
 (backtick-quoted), in the \code{subset} expression is equal to the number of 
-terms in the model (\bold{not} the number of estimated parameters).
+terms in the model (\bold{not} the number of parameters).
 
-To make the inclusion of a model term conditional on the presence of another one,
-the function \code{dc} (\dQuote{\bold{d}ependency \bold{c}hain}) can be used in
+To include a model term conditionally on the presence of another term, 
+use \code{dc} (\dQuote{\bold{d}ependency \bold{c}hain}) in
 the \code{subset} expression. \code{dc} takes any number of term names as
 arguments, and allows a term to be included only if all preceding ones
 are also present (e.g. \code{subset = dc(a, b, c)} allows for models \code{a},
@@ -234,7 +241,7 @@ Compound model terms (such as interactions, \sQuote{as-is} expressions within
  }{
  \code{`s(x, k = 2)`}
  }), except when they are arguments to \code{with} or \code{dc}.
- Backticks-quoted names must match exactly (including whitespace) the term names
+ Backtick-quoted names must match exactly (including whitespace) the term names
  as returned by \code{getAllTerms}.
 
 \subsection{\code{subset} expression syntax summary}{
@@ -324,8 +331,8 @@ and \code{bestglm} (\pkg{bestglm}).
 \code{regsubsets} in package \pkg{leaps} also performs all-subsets
 regression.
 
-Variable selection through regularization provided by various packages, e.g. \pkg{glmnet},
-	\pkg{lars} or \pkg{glmmLasso}.
+Variable selection through regularization provided by various packages,
+    e.g. \pkg{glmnet}, \pkg{lars} or \pkg{glmmLasso}.
 }
 
 

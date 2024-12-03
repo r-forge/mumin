@@ -19,7 +19,7 @@ umf_terms2formulalist <-
 function(termNames, opt, replaceInt = "(1)") {
 	i <- termNames %in% opt$interceptLabel
 	termNames[i] <- gsub("(Int)", replaceInt, termNames[i], fixed = TRUE)
-	fexpr <- lapply(termNames, function(x) parse(text = x)[[1L]])
+	fexpr <- lapply(termNames, str2lang)
 	
 	nm  <- as.character(lapply(fexpr, "[[", 1L))
 
