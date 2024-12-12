@@ -23,7 +23,7 @@ get.models(object, subset, cluster = NA, ...)
     }
     \item{subset}{subset of models, an expression evaluated within the model
         selection table (see \sQuote{Details}).}
-    \item{cluster}{ optionally, a \code{"cluster"} object. If it is a valid 
+    \item{cluster}{optionally, a \code{"cluster"} object. If it is a valid 
         cluster, models are evaluated using parallel computation. }
     \item{\dots}{additional arguments to update the models. For example, one 
         may want to fit models with \acronym{REML} (e.g. argument 

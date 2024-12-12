@@ -245,22 +245,42 @@ get(name, envir = asNamespace(pkg), inherits = FALSE)
 # used by 'model.sel' and 'dredge' with argument 'extra'
 .get.extras <-
 function(extra, r2nullfit = NULL) {
+	
 	extraExpr <- substitute(extra)
+	
 	if(!is.vector(extra)) {
 		extraExpr <- call("alist", extraExpr)
 		extra <- list(extra)
 	}
-	if(any(sapply(extra, is.function))) {
+	
+	isfun <- vapply(extra, is.function, NA)
+	if(any(isfun)) {
+		if(all(isfun) && !is.null(names(extra)) && all(nzchar(names(extra))))
+			return(extra)
+		
 		extraExpr[[1L]] <- as.name("alist")
 		extra <- eval.parent(extraExpr)
 	}
-	extraNames <- sapply(extra, function(x) switch(mode(x),
-		call = asChar(x[[1L]]), name = asChar(x), character = , x))
-	if(!is.null(names(extra)))
-		extraNames <- ifelse(nzchar(names(extra)), names(extra), extraNames)
-	extra <- structure(as.list(unique(extra)), names = extraNames)
+	
+	extraNames <- names(extra) %||% character(length(extra))
+	emptynames <- !nzchar(extraNames)
+	if(any(emptynames)) {
+		extraNames[emptynames] <-
+			do.call("c", .mapply(function(x, i) switch(mode(x),
+				call = asChar(x[[1L]]), name = asChar(x),
+					`function` = paste0("function", i),
+					character = , as.character(x)[1L]),
+				list(x = extra[emptynames], i = which(emptynames)), MoreArgs = list()))
+	}
+	
+	extra <- as.list(extra)
+	names(extra) <- extraNames
+	if(anyDuplicated(extra)) {
+		ok <- !duplicated(extra)
+		extra <- extra[ok]
+	}
 	if(any(i <- vapply(extra, is.language, TRUE)))
-		extra[i] <- lapply(extra[i], eval)
+		extra[i] <- lapply(extra[i], eval.parent)
     pos <- match(c("R^2", "adjR^2"), extra, nomatch = 0L)
 	if(any(pos != 0L)) {
         nullfit_ <- NULL # to pass R check

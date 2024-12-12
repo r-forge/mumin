@@ -61,7 +61,7 @@ dredge(global.model, beta = c("none", "sd", "partial.sd"), evaluate = TRUE,
 	are printed before actual fitting takes place. If \code{trace > 1}, a progress bar
 	is displayed. }
 
-	\item{varying}{ optionally, a named list describing the additional arguments
+	\item{varying}{optionally, a named list describing the additional arguments
 	to vary between the generated models. Item names correspond to the
 	arguments, and each item provides a list of choices (i.e. \code{list(arg1 =
 	list(choice1, choice2, ...), ...)}). Complex elements in the choice list
@@ -70,7 +70,7 @@ dredge(global.model, beta = c("none", "sd", "partial.sd"), evaluate = TRUE,
 	otherwise the result may be visually unpleasant. See example in
 	\lcode{Beetle}. }
 
-	\item{extra}{ optional additional statistics to be included in the result,
+	\item{extra}{optional additional statistics to be included in the result,
 	provided as functions, function names or a list of such (preferably named
 	or quoted). As with the \code{rank} argument, each function must accept as 
     an argument a fitted model object and return (a value coercible to) a
@@ -81,19 +81,19 @@ dredge(global.model, beta = c("none", "sd", "partial.sd"), evaluate = TRUE,
 	modified-\Rsq to the result, respectively (this is more efficient than using
 	\lcode{r.squaredLR} directly). }
 
-  \item{x}{ a \code{model.selection} object, returned by \code{dredge}. }
+  \item{x}{a \code{model.selection} object, returned by \code{dredge}. }
 
-  \item{abbrev.names}{ Should term names in the table header be abbreviated when
+  \item{abbrev.names}{Should term names in the table header be abbreviated when
     printed? This is the default. If full names are required, use \code{print()} 
     explicitly with this argument set to \code{FALSE}.
        }
 
-  \item{warnings}{ if \code{TRUE}, errors and warnings issued during the model
+  \item{warnings}{if \code{TRUE}, errors and warnings issued during the model
 	fitting are printed below the table (only with \code{pdredge}).
 	To permanently remove the warnings, set the object's attribute
 	\code{"warnings"} to \code{NULL}. }
 
-  \item{ct.args}{ optional list of arguments to be passed to
+  \item{ct.args}{optional list of arguments to be passed to
 	\lcode{coefTable} (e.g. \code{dispersion} parameter for \code{glm}
 		affecting standard errors used in subsequent
 		\lxcode{model averaging}{=model.avg}).}
@@ -102,7 +102,7 @@ dredge(global.model, beta = c("none", "sd", "partial.sd"), evaluate = TRUE,
         attribute \code{"deps"}. Can be used to fine-tune marginality 
         exceptions. }
 
-  \item{cluster}{ if a valid \code{"cluster"} object is given, it is used for
+  \item{cluster}{if a valid \code{"cluster"} object is given, it is used for
        parallel execution. If \code{NULL} or omitted, execution is 
        single-threaded.
 
@@ -111,7 +111,7 @@ dredge(global.model, beta = c("none", "sd", "partial.sd"), evaluate = TRUE,
        See \lcode{pdredge} for details and examples.
        }
 
-  \item{\dots}{ optional arguments for the \code{rank} function. Any can be
+  \item{\dots}{optional arguments for the \code{rank} function. Any can be
     an unevaluated expression, in which case any \code{x} within it will be 
 	substituted with the current model. }
 }
@@ -150,7 +150,7 @@ always return a scalar.
 \subsection{Interactions}{
 By default, marginality constraints are respected, so that \dQuote{all possible
 combinations} include only those that contain interactions with their
-respective main effects and all lower order terms, unless the
+respective main effects and all lower order terms,  unless the
 \code{global.model} makes an exception to this principle (e.g. due
 to a nested design such as \code{a / b}).
 

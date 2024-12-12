@@ -60,16 +60,17 @@ Generalized Estimation Equation model implementations:
 \lxcode{geeglm}{geepack} from package \CRANpkg{geepack}, 
 \lxcode{gee}{gee} from \CRANpkg{gee}, 
 \lxcode{geem}{geeM} from \CRANpkg{geeM}, 
-\unlxcode{wgeesel}{geeM} from \unCRANpkg{wgeesel}, 
+\unlxcode{wgeesel}{wgee} from \unCRANpkg{wgeesel}, 
 and \code{yags} from \href{http://yags.r-forge.r-project.org/}{\pkg{yags}} (on 
 R-Forge) can be used with \lcode{QIC} as the selection criterion.
 
 
-Other classes are also likely to be supported, in particular if they inherit
-from one of the above classes. In general, the models averaged with
-\code{model.avg} may belong to different types (e.g. \code{glm} and \code{gam}), 
-provided they use the same data and response, and if it is valid to do so. 
-This applies also to constructing model selection tables with \code{model.sel}.
+Further classes may also be supported, in particular if they inherit from one of
+the classes listed above. In general, models averaged using \code{model.avg} can
+belong to different types (e.g. \code{glm} and \code{gam}), provided they use 
+the same data and response, and, obviously, if it is valid to do so. This also 
+applies to the construction of model selection tables using \code{model.sel}.
+
 }
 
 \note{

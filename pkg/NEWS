@@ -1,5 +1,8 @@
 MuMIn package news:
 
+Changes in version 1.48.9 (2024-12-12)
+unmarked specs restored
+
 Changes in version 1.48.8 (2024-12-03)
 - small code improvements and documentation changes
 (fixed) extra functions for `dredge` now can return a result coercible to a 

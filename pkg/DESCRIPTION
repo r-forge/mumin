@@ -1,8 +1,8 @@
 Package: MuMIn
 Type: Package
 Title: Multi-Model Inference
-Version: 1.48.8
-Date: 2024-12-03
+Version: 1.48.9
+Date: 2024-12-12
 Encoding: UTF-8
 Authors@R: c(
   person("Kamil", "Bartoń", role=c("aut", "cre"), 

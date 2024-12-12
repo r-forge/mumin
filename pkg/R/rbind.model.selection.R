@@ -1,3 +1,6 @@
+# TODO: apply extras if models included
+
+
 `rbind.model.selection` <-
 function (..., deparse.level = 1, make.row.names = TRUE) {
 	
@@ -16,6 +19,9 @@ function (..., deparse.level = 1, make.row.names = TRUE) {
 
 	.allitemsidentical <- 
     function(x) all(vapply(x[-1L], identical, FALSE, x[[1L]]))
+    
+    if(!.allitemsidentical(lapply(items, attr, "beta")))
+		stop("standardisation of coefficients is not consistent across tables")
 
 	if(!.allitemsidentical(lapply(lapply(items, attr, "rank"), attr, "call")))
 		stop("tables are not ranked by the same IC")
