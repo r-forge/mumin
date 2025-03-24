@@ -1,5 +1,8 @@
 MuMIn package news:
 
+Changes in version 1.48.10 (2025-03-25)
+- (fixed) exprApply - problem rather unlikely to show up
+
 Changes in version 1.48.9 (2024-12-12)
 - (fixed) restored support for some 'unmarkedFit' models, broken since the 
   previous version (spotted by Tash Harrison).
