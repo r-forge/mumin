@@ -104,6 +104,7 @@ function(object, ...) {
 			dimnames(rval[[i]]) <- list(dn, dn)
 		}
 	}
+    attr(rval, "sc") <- object$sigma
     rval
 }
 
