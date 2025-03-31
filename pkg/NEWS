@@ -1,7 +1,10 @@
 MuMIn package news:
 
+Changes in version 1.48.11 (2025-03-31)
+- removed more references to archived and undeclared packages
+
 Changes in version 1.48.10 (2025-03-25)
-- (fixed) exprApply - problem rather unlikely to show up
+- (fixed) obscure problem in exprApply
 
 Changes in version 1.48.9 (2024-12-12)
 - (fixed) restored support for some 'unmarkedFit' models, broken since the 
@@ -802,7 +805,7 @@ Changes in version 1.7.6 (2012-04-01)
 Changes in version 1.7.5 (2012-03-27)
 - (added) methods for 'MCMCglmm' class, and function 'DIC': works with
   'model.sel' and 'dredge' (but not 'model.avg').
-'unmarked' is removed from 'Suggested' packages (recently it is often
+- 'unmarked' is removed from 'Suggested' packages (recently it is often
   unavailable on CRAN and causes errors during R CHECK). Added workarounds to
   pass (or trick) the R CHECK.
 
