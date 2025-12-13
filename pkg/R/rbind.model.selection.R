@@ -21,12 +21,12 @@ function (..., deparse.level = 1, make.row.names = TRUE) {
     function(x) all(vapply(x[-1L], identical, FALSE, x[[1L]]))
     
     if(!.allitemsidentical(lapply(items, attr, "beta")))
-		stop("standardisation of coefficients is not consistent across tables")
-
-	if(!.allitemsidentical(lapply(lapply(items, attr, "rank"), attr, "call")))
+		stop("coefficient standardisation is not consistent across tables")
+		
+	if(!.allitemsidentical(lapply(items, \(x) .getRankCall(attr(x, "rank")))))
 		stop("tables are not ranked by the same IC")
 	if(!.allitemsidentical(lapply(items, "attr", "nobs")))
-		stop("models are not all fitted to the same number of observations")
+		stop("number of observations differs across models")
 
 	.combine <-
 	function(x, y, pos, len = length(y)) {

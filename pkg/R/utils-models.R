@@ -69,6 +69,11 @@ function(rank = "AICc", rank.args = NULL, object = NULL,
 	wrappedrank
 }
 
+.getRankCall <-
+function(rank) {
+	get("..rankfunctioncall", environment(rank), inherits = FALSE, mode = "language")
+}
+
 # Like `regmatches`, but for captured groups, and simplistic.
 # Only does results of `regexpr`.
 .matches <-

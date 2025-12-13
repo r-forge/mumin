@@ -102,7 +102,7 @@ function(global.model, beta = c("none", "sd", "partial.sd"),
 			 warn = FALSE)
 
 	IC <- .getRank(rank, rankArgs)
-
+	
 	if(any(badargs <- is.na(match(names(rankArgs),
 		c(names(formals(get("rank", environment(IC))))[-1L], names(formals()))))))
 		cry("RTFM", ngettext(sum(badargs),
@@ -111,14 +111,14 @@ function(global.model, beta = c("none", "sd", "partial.sd"),
 			prettyEnumStr(names(rankArgs[badargs])), "'dredge' or 'rank'",
 			warn = TRUE)
 
-
-	ICName <- as.character(attr(IC, "call")[[1L]])
+		
+	ICName <- as.character(.getRankCall(IC)[[1L]])
 
 	if(length(tryCatch(IC(global.model), error = function(e) {
-		stop(simpleError(conditionMessage(e), subst(attr(IC, "call"),
+		stop(simpleError(conditionMessage(e), subst(.getRankCall(IC),
 			x = as.name("global.model"))))
 	})) != 1L) {
-		cry(, "result of '%s' is not of length 1", asChar(attr(IC, "call")))
+		cry(, "result of '%s' is not of length 1", asChar(.getRankCall(IC)))
 	}
 
 	allTerms <- allTerms0 <- getAllTerms(global.model, intercept = TRUE,
@@ -585,6 +585,8 @@ function(global.model, beta = c("none", "sd", "partial.sd"),
 		for (i in varyingNames) rval[, i] <-
 			factor(rval[, i], levels = vnum[[i]], labels = variant.names[vnum[[i]]])
 	}
+	
+	#koBrowseHere()
 
 	rval <- rval[o <- order(rval[, ICName], decreasing = FALSE), ]
 	coefTables <- coefTables[o]
