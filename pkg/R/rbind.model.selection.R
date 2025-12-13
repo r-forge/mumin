@@ -79,7 +79,7 @@ function (..., deparse.level = 1, make.row.names = TRUE) {
 	newattr <- list(column.types = vct)
 	for(i in combineAttrs)
 		newattr[[i]] <- unlist(lapply(items, attr, i), recursive = FALSE, use.names = FALSE)
-	k <- c("rank", "nobs")
+	k <- c("rank", "nobs", "beta")
 	newattr[k] <- attributes(items[[1L]])[k]
 
 	tmp <- lapply(items, attr, "terms")

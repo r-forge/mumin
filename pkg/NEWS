@@ -1,5 +1,14 @@
 MuMIn package news:
 
+Changes in version 1.48.13 (2025-12-13)
+- (fixed) fixCoefNames: warning "match limit exceeded" with some coefficient
+  names e.g. "xx(aaaaaa:bbbbbbbbb:ccc(I(d)))" 
+
+Changes in version 1.48.12 (2025-06-03)
+- (fixed) rank function wrapper function is simplified, and its environment 
+  no longer contains the unnecessary global model object which resulted in 
+  larger memory use and file size when saving
+
 Changes in version 1.48.11 (2025-03-31)
 - removed more references to archived and undeclared packages
 
