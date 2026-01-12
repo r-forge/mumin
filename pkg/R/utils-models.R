@@ -19,8 +19,8 @@ function(x) {
 function(rank = "AICc", rank.args = NULL, object = NULL,
 	envir = parent.frame(), ...) {
 	rank.args <- c(rank.args, list(...))
-
-    x <- namestr <- NULL # just not to annoy R check
+	
+    namestr <- NULL # just not to annoy R check
 	isrankfun <- FALSE
 	if(is.null(rank)) {
 		rank <- AICc
@@ -28,7 +28,7 @@ function(rank = "AICc", rank.args = NULL, object = NULL,
 	} else {
 		isrankfun <- is.function(rank) && (
 			inherits(rank, "rankFunction") ||
-				is.call(environment(x)$..rankfunctioncall))
+				is.call(environment(rank)$..rankfunctioncall))
 		if(isrankfun && length(rank.args) == 0L)
 			return(rank)
 
@@ -95,9 +95,12 @@ function (x, m) {
 # "log(`b:a`)") - but this is unlikely to be a valid model term.
 `fixCoefNames` <-
 function(x, peel = TRUE) {
+	
 	if(!length(x)) return(x)
 	ia <- grep(":", x, fixed = TRUE)
 	if(!length(ia)) return(structure(x, order = rep.int(1L, length(x))))
+		
+		#koBrowseHere()
 	
 	ixi <- x[ia]
 	if(peel) {
@@ -128,13 +131,25 @@ function(x, peel = TRUE) {
 		}
 	}
 	# replace {...}, [...], (...), ::, and ::: with placeholders
-	m <- gregexpr("(?:\\{(?:[^\\{\\}]*|(?0))*\\}|\\[(?:[^\\[\\]]*|(?0))*\\]|\\((?:[^()]*|(?0))*\\)|(?>:::?))", ixi, perl = TRUE)
-	xtpl <- ixi
-	regmatches(xtpl, m) <- lapply(m, function(x) {
-		if((ml <- attr(x, "match.length"))[1L] == -1L) return(character(0L))
-		vapply(ml, function(n) paste0(rep("_", n), collapse = ""), NA_character_)
-	})
 	
+	# When using a single RX (with alternating patterns (a|b|c)), sometimes
+	# there is a warning: PCRE error 'match limit exceeded'.
+	# To work this around, the three bracket types are matched sequentially:
+	rxx <- c("\\[[^\\[\\]]*+(?:(?0)[^\\]\\[]*)*+\\]",
+			 "\\([^\\(\\)]*+(?:(?0)[^\\)\\(]*)*+\\)",
+			 "\\{[^\\{\\}]*+(?:(?0)[^\\}\\{]*)*+\\}",
+			 ":::?")
+	
+	xtpl <- ixi
+	for(rx in rxx) {
+		m <- gregexpr(xtpl, pattern = rx, perl = TRUE)
+		regmatches(xtpl, m) <- lapply(m, function(x) {
+			if((ml <- attr(x, "match.length"))[1L] == -1L) return(character(0L))
+			vapply(ml, function(n) paste0(rep("_", n), collapse = ""), NA_character_)
+		})
+	}
+		
+
 	# split by ':' and sort
 	splits <- gregexpr(":", xtpl, fixed = TRUE)
 	ixi <- mapply(function(x, p) {
