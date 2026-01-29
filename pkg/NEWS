@@ -2,8 +2,9 @@ MuMIn package news:
 
 Changes in version 1.48.15 (2026-01-29)
 - adaptations to changes in 'unmarkedFit' structure introduced 
-  in 'unmarked' v. 1.5.1. As a result, 'MuMIn's functions are no longer 
-  compatible with older versions of 'unmarked'.
+  in 'unmarked' v. 1.5.1 (thanks to Tash Harrison for information).
+  As a result, 'MuMIn's functions are no longer compatible with older 
+  versions of 'unmarked'.
 
 Changes in version 1.48.14 (2026-01-12)
 - (fixed) fixCoefNames: warning "match limit exceeded" with some coefficient
