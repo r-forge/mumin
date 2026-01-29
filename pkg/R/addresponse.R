@@ -25,3 +25,10 @@ function(x, f, y = getresponse(x), env = parent.frame()) {
     environment(f) <- env
     f
 }
+
+getresponse <-
+function(x, f) {
+    tt <- terms(formula(x))
+    if(attr(tt, "response") == 0L) NULL else 
+        attr(tt, "variables")[-1L][[attr(tt, "response")]]
+}
