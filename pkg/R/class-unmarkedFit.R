@@ -32,7 +32,6 @@ function(x, specs = getspecs(x, TRUE), names.item = "model") {
     
     if(!.hasSlot(x, "formlist"))
 		stop("incompatible 'unmarkedFit' object (possibly created with unmarked version < 1.5.1): 'formlist' element is missing")
-    
 	
 	fl <- x@formlist
 	i <- match(specs$formlist.name, names(fl), nomatch = 0L)
@@ -137,4 +136,20 @@ function(obj, termNames, opt, ...) {
 		names(zarg) <- formulanames
 		zarg
 	}
+}
+
+umf_vcov <-
+function(object, method = NA, ...) {
+    method <- if(anyNA(method)) NA else
+        match.arg(method, choices = c("hessian", "nonparboot"))
+    if(is.na(method)) {
+        if(.hasSlot(object, "TMB") && !is.null(object@TMB)) {
+            method <- "TMB"
+        } else if(!is.null(object@opt$hessian)) {
+            method <- "hessian"
+        } else if(!is.null(object@bootstrapSamples)) {
+            method <- "nonparboot"
+        } else return(NULL)
+    }
+    return(vcov(object, method = method, ...))
 }

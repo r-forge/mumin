@@ -132,6 +132,7 @@ function(x, peel = TRUE) {
 	}
 	# replace {...}, [...], (...), ::, and ::: with placeholders
 	
+	
 	# When using a single RX (with alternating patterns (a|b|c)), sometimes
 	# there is a warning: PCRE error 'match limit exceeded'.
 	# To work this around, the three bracket types are matched sequentially:
@@ -149,7 +150,7 @@ function(x, peel = TRUE) {
 		})
 	}
 		
-
+	
 	# split by ':' and sort
 	splits <- gregexpr(":", xtpl, fixed = TRUE)
 	ixi <- mapply(function(x, p) {
